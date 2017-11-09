@@ -28,14 +28,19 @@ def getData():
         # QUESTIONOBJ FORMATION
         description = ""
         for head in header:
-            name = head.text
+            name = head.text.encode('utf-8')
         for a in div:
             text = a.encode('utf-8')
             if any(x in text.lower() for x in breaker_words):
                 break
             else:
                 description = description + a.text + " "
+        print name
 
+        description.encode('utf-8')
+        link.encode('utf-8')
         questions.append(Question(name, description, link, leetcode_source))
-        print questions.description
     return questions
+
+if __name__ == "__main__":
+    getData()
