@@ -1,5 +1,8 @@
 import boto3
 import programcreek
+from flask import Flask
+from flask import jsonify
+app = Flask(__name__)
 
 def update_database():
     # INITIALIZE DATABASE CONNECTION
@@ -26,5 +29,11 @@ def update_database():
                 }
             )
 
-if __name__ == "__main__":
-    update_database()
+@app.route("/leetcode_questions")
+def getLeetcodeQuestions():
+    # INITIALIZE DATABASE CONNECTION
+    dynamodb = boto3.resource('dynamodb')
+    interviewQuestionsTable = dynamodb.Table('interview-questions')
+
+    questions = interviewQuestionsTable.scan()
+    return jsonify(questions)
