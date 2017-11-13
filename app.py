@@ -29,7 +29,7 @@ def update_database():
                 }
             )
 
-@app.route("/leetcode_questions")
+@app.route("/questions")
 def getLeetcodeQuestions():
     # INITIALIZE DATABASE CONNECTION
     dynamodb = boto3.resource('dynamodb')
