@@ -16,6 +16,7 @@ export class App extends Component {
       <div className="App">
         <LogoutBar/>
         <div className='title'>INTERVIEW CENTRAL</div>
+        {/* TODO: SEARCH BAR GOES HERE */}
         {this.props.questions.map((question, index) =>
           <BigTile
             questionName={question.name}
