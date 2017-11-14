@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import BigTile from './views/bigtile/bigtile';
 
 class App extends Component {
   render() {
@@ -13,6 +14,11 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <BigTile
+            questionName={'Test Name'}
+            questionDescription={'Test Description'}
+        />
       </div>
     );
   }
