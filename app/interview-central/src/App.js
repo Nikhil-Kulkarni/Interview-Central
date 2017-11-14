@@ -3,7 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 import BigTile from './views/bigtile/bigtile';
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
       <div className="App">
