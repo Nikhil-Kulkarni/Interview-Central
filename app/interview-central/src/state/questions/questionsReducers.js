@@ -7,6 +7,7 @@ export function questionsReducer(state = initialState, action) {
         case QUESTIONS_SUCCESS:
             return {
                 questions: action.payload,
+                success: true,
             };
         case QUESTIONS_ERROR:
             return {

@@ -5,3 +5,7 @@ export const getQuestions = (state) => {
         return state;
     }
 };
+
+export const getSuccess = (state) => {
+    return state.questions.success;
+};
