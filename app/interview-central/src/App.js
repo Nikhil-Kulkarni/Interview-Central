@@ -21,7 +21,8 @@ export class App extends Component {
   }
 
   onInputChange(event) {
-    let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase()));
+    let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
+     || question.description.toLowerCase().includes(event.target.value.toLowerCase()));
 
     this.setState({
       searchTerm: event.target.value,
