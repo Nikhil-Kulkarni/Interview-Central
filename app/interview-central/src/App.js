@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import BigTile from './views/bigtile/bigtile';
 import LogoutBar from './views/topbar/components/logoutbar';
