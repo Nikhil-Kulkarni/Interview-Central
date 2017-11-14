@@ -2,7 +2,9 @@ import boto3
 import programcreek
 from flask import Flask
 from flask import jsonify
+from flask_cors import CORS
 app = Flask(__name__)
+CORS(app)
 
 def update_database():
     # INITIALIZE DATABASE CONNECTION

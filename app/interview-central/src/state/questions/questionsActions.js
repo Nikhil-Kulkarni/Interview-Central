@@ -25,12 +25,12 @@ export function questionsError() {
 
 export function getQuestionsAction() {
     return (dispatch) => {
-        dispatch(getQuestions());
+        // dispatch(getQuestions());
         return getQuestionsAPI().then(([response, json]) => {
             if (response.status === 200) {
                 dispatch(getQuestionsSuccess(json));                
             } else {
-                dispatch(questionsError);
+                dispatch(questionsError());
             }
         });
     }
