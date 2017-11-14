@@ -17,7 +17,9 @@ export class AppCont extends Component {
             );
         } else {
             return (
-                <App questions={[]}/>
+                <div>
+                    <App questions={[]}/>
+                </div>
             );
         }       
     }

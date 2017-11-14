@@ -16,11 +16,12 @@ export class App extends Component {
     return (
       <div className="App">
         <LogoutBar/>
-
+        <div className='title'>INTERVIEW CENTRAL</div>
         {this.props.questions.map((question, index) =>
           <BigTile
             questionName={question.name}
             questionDescription={question.description}
+            key={question.name}
           />
         )}
       </div>
