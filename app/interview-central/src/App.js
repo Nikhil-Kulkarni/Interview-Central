@@ -37,11 +37,12 @@ export class App extends Component {
         <div className='title'>INTERVIEW CENTRAL</div>
         {/* TODO: SEARCH BAR GOES HERE */}
         <input type="text" onChange={this.onInputChange.bind(this)} />
+        
         {this.state.currentlyDisplayed.map((question, index) =>
           <BigTile
             questionName={question.name}
             questionDescription={question.description}
-            key={question.name}
+            key={index}
           />
         )}
       </div>
