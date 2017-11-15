@@ -89,17 +89,23 @@ def registerUser():
 
     return jsonify(response)
 
-@app.route("/login", methods=['GET'])
+@app.route("/login", methods=['POST'])
 def loginUser():
     dynamodb = boto3.resource('dynamodb')
     usersTable = dynamodb.Table('interview-users')
-
-    print request.data
 
     jsonBody = json.loads(request.data)
     username = jsonBody["username"]
     password = jsonBody["password"]
 
     filtering_exp = Key("username").eq(username)
-    response = table.query(KeyConditionExpression=filtering_exp)
-    print response
+    response = usersTable.query(KeyConditionExpression=filtering_exp)
+
+    if response["Count"] == 0:
+        return jsonify({"success": False, "error": "Username does not exist"})
+    else:
+        passwordCheck = response["Items"][0]["password"]
+        if password == passwordCheck:
+            return jsonify({"success": True, "username": username})
+        else:
+            return jsonify({"success": False, "error": "Incorrect password"})
