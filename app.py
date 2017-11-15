@@ -42,12 +42,12 @@ def getLeetcodeQuestions():
     questions = interviewQuestionsTable.scan()
     return jsonify(questions)
 
-@app.route("/getHomeData/<person>")
-def getHomeData(person):
+@app.route("/getHomeData/<username>")
+def getHomeData(username):
     dynamodb = boto3.resource('dynamodb')
     suitesTable = dynamodb.Table('interview-suites')
 
-    filtering_exp = Key("person").eq(person)
+    filtering_exp = Key("person").eq(username)
     response = suitesTable.scan(FilterExpression=filtering_exp)
 
     return jsonify(response)
@@ -70,3 +70,36 @@ def createSuite():
         }
     )
     return jsonify(response)
+
+@app.route("/register", methods=['POST'])
+def registerUser():
+    dynamodb = boto3.resource('dynamodb')
+    usersTable = dynamodb.Table('interview-users')
+
+    jsonBody = json.loads(request.data)
+    username = jsonBody["username"]
+    password = jsonBody["password"]
+
+    response = usersTable.put_item(
+        Item={
+            'username':str(username),
+            'password':str(password)
+        }
+    )
+
+    return jsonify(response)
+
+@app.route("/login", methods=['GET'])
+def loginUser():
+    dynamodb = boto3.resource('dynamodb')
+    usersTable = dynamodb.Table('interview-users')
+
+    print request.data
+
+    jsonBody = json.loads(request.data)
+    username = jsonBody["username"]
+    password = jsonBody["password"]
+
+    filtering_exp = Key("username").eq(username)
+    response = table.query(KeyConditionExpression=filtering_exp)
+    print response
