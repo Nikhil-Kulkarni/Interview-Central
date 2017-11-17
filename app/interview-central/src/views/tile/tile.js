@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import './bigtile.css';
+import './tile.css';
 
-export default class BigTile extends Component {
+export default class Tile extends Component {
     static propTypes = {
         questionName: PropTypes.string.isRequired,
-        questionDescription: PropTypes.string.isRequired
+        questionDescription: PropTypes.string.isRequired,
+        type: PropTypes.string.isRequired,
     }
 
     componentWillMount() {
@@ -18,7 +19,7 @@ export default class BigTile extends Component {
         } = this.props;
 
         return (
-            <div className='box'>
+            <div className={this.props.type === "BIG" ? 'big' : 'small'}>
                 <h5 className='boxText'>{questionName}</h5>
                 <h6 className='boxText'>{questionDescription}</h6>
             </div>

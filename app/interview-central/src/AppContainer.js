@@ -17,12 +17,12 @@ export class AppCont extends Component {
 
         if (this.props.success) {
             return (
-                <App questions={items.questions.Items}/>
+                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]}/>
             );
         } else {
             return (
                 <div>
-                    <App questions={[]}/>
+                    <App questions={[]} mySuite={[]} recommended={[]}/>
                 </div>
             );
         }       

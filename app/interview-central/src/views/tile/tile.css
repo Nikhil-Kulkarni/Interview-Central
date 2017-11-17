@@ -1,0 +1,38 @@
+.big {
+    border-radius: 10px;
+    background: #10354B;
+    padding: 5px;
+    width: 60%;
+    height: 120px;
+    display: block;
+    margin:auto;
+    margin-top: 30px;
+    -webkit-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+}
+
+.small {
+    border-radius: 10px;
+    background: #10354B;
+    padding: 5px;
+    width: 100%;
+    height: 120px;
+    display: block;
+    margin:auto;
+    margin-top: 30px;
+    -webkit-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+}
+
+.boxText {
+    color: white;
+    display: block;
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    margin-bottom: 0px;
+    float:left;
+    clear: both;
+}

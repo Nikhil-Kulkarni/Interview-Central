@@ -1,9 +1,23 @@
-.box {
+.big {
     border-radius: 10px;
     background: #10354B;
     padding: 5px;
     width: 60%;
-    height: 100px;
+    height: 120px;
+    display: block;
+    margin:auto;
+    margin-top: 30px;
+    -webkit-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 83px -16px rgba(0,0,0,0.75);
+}
+
+.small {
+    border-radius: 10px;
+    background: #10354B;
+    padding: 5px;
+    width: 30%;
+    height: 120px;
     display: block;
     margin:auto;
     margin-top: 30px;
