@@ -40,6 +40,7 @@ export class App extends Component {
         <div className='title'>INTERVIEW CENTRAL</div>
         {/* TODO: SEARCH BAR GOES HERE */}
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} />
+        <button className="searchButton">SEARCH</button>
 
         <Row around="xs">  
 
