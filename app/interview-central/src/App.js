@@ -3,7 +3,7 @@ import './App.css';
 import Tile from './views/tile/tile';
 import LogoutBar from './views/topbar/components/logoutbar';
 import PropTypes from 'prop-types';
-import { Grid, Row, Col } from 'react-flexbox-grid';
+import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
 
 export class App extends Component {
@@ -39,17 +39,17 @@ export class App extends Component {
         <LogoutBar/>
         <div className='title'>INTERVIEW CENTRAL</div>
         {/* TODO: SEARCH BAR GOES HERE */}
-        <input type="text" onChange={this.onInputChange.bind(this)} />
+        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} />
 
         <Row around="xs">  
 
-          <Col xs={4}>
+          <Col xs={6}>
             <Row>
               <Col xs={12}>
-                <div className='header'>MY SUITE</div>             
+                <div className='header'>MY SUITES</div>             
                 {this.props.mySuite.map((question, index) =>
                   <Row center="xs" key={index}>
-                    <Col xs={12}>
+                    <Col xs={6}>
                       <Tile
                         questionName={question.name}
                         questionDescription={question.description}
@@ -63,15 +63,15 @@ export class App extends Component {
             </Row>
           </Col>
           
-          <Col xs={4}>          
+          <Col xs={6}>          
             <Row>
               <Col xs={12}>
                 <div className='header'>RECOMMENDED</div>                           
                 <Row center="xs">
-                    <Col xs={12}>
+                    <Col xs={6}>
                       <Tile
-                        questionName="Example of recommended"
-                        questionDescription="This is an example recommended question"
+                        questionName="Recommended"
+                        questionDescription="This is an example of a recommended question"
                         type="SMALL"
                         />
                     </Col>
