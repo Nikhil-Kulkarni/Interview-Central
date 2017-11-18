@@ -42,7 +42,7 @@ export class App extends Component {
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} />
         <button className="searchButton">SEARCH</button>
 
-        <Row around="xs">  
+        <Row around="xs">
 
           <Col xs={6}>
             <Row>
