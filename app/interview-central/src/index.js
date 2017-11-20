@@ -5,7 +5,7 @@ import LoginContainer from './LoginContainer';
 import './index.css';
 import { Provider } from 'react-redux';
 import { configure } from './config/config-store';
-import { Router, Route, hashHistory } from 'react-router';
+import { Router, Route } from 'react-router';
 import { createBrowserHistory } from 'history';
 const store = configure({});
 ReactDOM.render(
