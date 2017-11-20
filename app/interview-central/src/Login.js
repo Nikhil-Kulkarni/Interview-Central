@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import Textbox from './views/textbox/textbox';
+import './Login.css';
 
 export default class Login extends Component {
 
@@ -7,7 +9,15 @@ export default class Login extends Component {
 
     render() {
         return (
-            <div>LOGIN</div>
+            <div className="Login">
+                <div className='headerTitle'>INTERVIEW CENTRAL</div>
+                <div className="box">
+                    <Textbox name="Username" placeholder="Username" />
+                </div>
+                <div className="box">
+                    <Textbox name="Password" placeholder="Password" />                
+                </div>
+            </div>
         );
     }
 
