@@ -46,9 +46,7 @@ export class App extends Component {
   }
 
   handleSearch() {
-      console.log("Searching");
       let newlyDisplayed = this.state.newlyDisplayed;
-      console.log(newlyDisplayed);
       this.setState({
           currentlyDisplayed: newlyDisplayed,
           showSearch: true,
