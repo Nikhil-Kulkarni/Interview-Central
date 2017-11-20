@@ -75,7 +75,6 @@ export function loginUserError() {
 
 export function loginUserAction(username, password) {
     return (dispatch) => {
-        // dispatch(getQuestions());
         return loginUserAPI(username, password).then(([response, json]) => {
             if (response.status === 200) {
                 dispatch(loginUserSuccess(json));                

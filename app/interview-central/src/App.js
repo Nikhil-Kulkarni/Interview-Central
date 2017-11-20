@@ -58,7 +58,6 @@ export class App extends Component {
       <div className="App">
         <LogoutBar/>
         <div className='title'>INTERVIEW CENTRAL</div>
-        {/* TODO: SEARCH BAR GOES HERE */}
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
               if (event.key === "Enter") {
                 this.handleSearch();
