@@ -18,19 +18,41 @@ export class App extends Component {
     this.state = {
       searchTerm: '',
       currentlyDisplayed: this.props.questions,
+      newlyDisplayed: this.props.questions,
+      showSearch: false
     };
 
     this.onInputChange.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   onInputChange(event) {
-    let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
-     || question.description.toLowerCase().includes(event.target.value.toLowerCase()));
+    if (event.target.value !== "") {
+        let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
+         || question.description.toLowerCase().includes(event.target.value.toLowerCase()));
 
-    this.setState({
-      searchTerm: event.target.value,
-      currentlyDisplayed: newlyDisplayed,
-    });
+        this.setState({
+          searchTerm: event.target.value,
+          newlyDisplayed: newlyDisplayed,
+        });
+    } else {
+        this.setState({
+            searchTerm: '',
+            currentlyDisplayed: this.props.questions,
+            showSearch: false,
+        });
+    }
+
+  }
+
+  handleSearch() {
+      console.log("Searching");
+      let newlyDisplayed = this.state.newlyDisplayed;
+      console.log(newlyDisplayed);
+      this.setState({
+          currentlyDisplayed: newlyDisplayed,
+          showSearch: true,
+      });
   }
 
   render() {
@@ -39,59 +61,71 @@ export class App extends Component {
         <LogoutBar/>
         <div className='title'>INTERVIEW CENTRAL</div>
         {/* TODO: SEARCH BAR GOES HERE */}
-        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} />
-        <button className="searchButton">SEARCH</button>
+        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
+              if (event.key === "Enter") {
+                this.handleSearch();
+              }
+            }}/>
+        <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
+        {this.state.showSearch ?
+            <div>
+            {this.state.currentlyDisplayed.map((question, index) =>
+              <Tile
+                name={question.name}
+                description={question.description}
+                type="BIG"
+                key={index}
+              />
+            )}
+            </div>
 
-        <Row around="xs">
+            :
 
-          <Col xs={6}>
-            <Row>
-              <Col xs={12}>
-                <div className='header'>MY SUITES</div>
-                {this.props.mySuite.map((curSuite, index) =>
-                  <Row center="xs" key={index}>
-                    <Col xs={6}>
-                      <Tile
-                        name={curSuite.suiteName}
-                        description={curSuite.questions.join()}
-                        type="SMALL"
-                        key={index}
-                        />
-                    </Col>
-                  </Row>
-                )}
+            <Row around="xs">
+
+              <Col xs={6}>
+                <Row>
+                  <Col xs={12}>
+                    <div className='header'>MY SUITES</div>
+                    {this.props.mySuite.map((curSuite, index) =>
+                      <Row center="xs" key={index}>
+                        <Col xs={6}>
+                          <Tile
+                            name={curSuite.suiteName}
+                            description={curSuite.questions.join()}
+                            type="SMALL"
+                            key={index}
+                            />
+                        </Col>
+                      </Row>
+                    )}
+                  </Col>
+                </Row>
               </Col>
-            </Row>
-          </Col>
 
-          <Col xs={6}>
-            <Row>
-              <Col xs={12}>
-                <div className='header'>RECOMMENDED</div>
-                <Row center="xs">
-                    <Col xs={6}>
-                      <Tile
-                        name="Recommended"
-                        description="This is an example of a recommended question"
-                        type="SMALL"
-                        />
-                    </Col>
-                  </Row>
+              <Col xs={6}>
+                <Row>
+                  <Col xs={12}>
+                    <div className='header'>RECOMMENDED</div>
+                    <Row center="xs">
+                        <Col xs={6}>
+                          <Tile
+                            name="Recommended"
+                            description="This is an example of a recommended question"
+                            type="SMALL"
+                            />
+                        </Col>
+                      </Row>
+                  </Col>
+                </Row>
               </Col>
-            </Row>
-          </Col>
 
-        </Row>
+            </Row>
+        }
+
 
         {/* TODO: ALL INTERVIEW QUESTIONS BELOW. SEARCHING ONLY WORKS ON THIS BC WE USING STATE.CURRENTLYDISPLAYED */}
-        {/* {this.state.currentlyDisplayed.map((question, index) =>
-          <Tile
-            questionName={question.name}
-            questionDescription={question.description}
-            type="BIG"
-            key={index}
-          />
-        )} */}
+
       </div>
     );
   }
