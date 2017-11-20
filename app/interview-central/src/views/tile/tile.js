@@ -4,8 +4,8 @@ import './tile.css';
 
 export default class Tile extends Component {
     static propTypes = {
-        suiteName: PropTypes.string.isRequired,
-        suiteQuestionNames: PropTypes.string.isRequired,
+        name: PropTypes.string.isRequired,
+        description: PropTypes.string.isRequired,
         type: PropTypes.string.isRequired,
     }
 
@@ -14,14 +14,14 @@ export default class Tile extends Component {
 
     render() {
         const {
-            suiteName,
-            suiteQuestionNames,
+            name,
+            description,
         } = this.props;
 
         return (
             <div className={this.props.type === "BIG" ? 'big' : 'small'}>
-                <h5 className='boxText'>{suiteName}</h5>
-                <h6 className='boxText'>{suiteQuestionNames}</h6>
+                <h5 className='boxText'>{name}</h5>
+                <h6 className='boxText'>{description}</h6>
             </div>
         );
     }

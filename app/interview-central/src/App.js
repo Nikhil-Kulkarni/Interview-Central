@@ -52,8 +52,8 @@ export class App extends Component {
                   <Row center="xs" key={index}>
                     <Col xs={6}>
                       <Tile
-                        suiteName={curSuite.suiteName}
-                        suiteQuestionNames={curSuite.questions.join()}
+                        name={curSuite.suiteName}
+                        description={curSuite.questions.join()}
                         type="SMALL"
                         key={index}
                         />
@@ -71,8 +71,8 @@ export class App extends Component {
                 <Row center="xs">
                     <Col xs={6}>
                       <Tile
-                        questionName="Recommended"
-                        questionDescription="This is an example of a recommended question"
+                        name="Recommended"
+                        description="This is an example of a recommended question"
                         type="SMALL"
                         />
                     </Col>
