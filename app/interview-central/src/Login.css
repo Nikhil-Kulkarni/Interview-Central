@@ -9,6 +9,14 @@
     margin-top: 100px;
 }
 
-.box {
+.box, .loginDiv {
     margin-top: 10px;
+}
+
+.loginButton {
+    background: #10354B;
+    border: 0px;
+    height: 35px;
+    width: 362px;
+    color: white;
 }

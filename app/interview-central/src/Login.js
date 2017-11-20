@@ -17,6 +17,9 @@ export default class Login extends Component {
                 <div className="box">
                     <Textbox name="Password" placeholder="Password" />                
                 </div>
+                <div className="loginDiv">
+                    <button className="loginButton">LOGIN</button>
+                </div>
             </div>
         );
     }
