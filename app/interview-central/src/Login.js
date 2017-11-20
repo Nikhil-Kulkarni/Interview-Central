@@ -7,6 +7,10 @@ export default class Login extends Component {
     componentWillMount() {
     }
 
+    login() {
+        
+    }
+
     render() {
         return (
             <div className="Login">
