@@ -76,6 +76,7 @@ export function loginUserError() {
 export function loginUserAction(username, password) {
     return (dispatch) => {
         return loginUserAPI(username, password).then(([response, json]) => {
+            console.log(json);
             if (response.status === 200) {
                 dispatch(loginUserSuccess(json));                
             } else {
@@ -87,6 +88,7 @@ export function loginUserAction(username, password) {
 
 export function loginUserAPI(username, password) {
     const URL = `http://localhost:5000/login`;
+    console.log("LOGIN USER API");
     return fetch(URL, 
         { 
             method: 'POST',

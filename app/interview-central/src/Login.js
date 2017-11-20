@@ -14,6 +14,7 @@ export default class Login extends Component {
     }
 
     login(event) {
+        event.preventDefault();
         let username = event.target.username.value;
         let password = event.target.password.value;
 
