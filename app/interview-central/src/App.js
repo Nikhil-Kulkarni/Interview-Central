@@ -46,11 +46,14 @@ export class App extends Component {
   }
 
   handleSearch() {
-      let newlyDisplayed = this.state.newlyDisplayed;
-      this.setState({
-          currentlyDisplayed: newlyDisplayed,
-          showSearch: true,
-      });
+      if (this.state.searchTerm !== '') {
+          let newlyDisplayed = this.state.newlyDisplayed;
+          this.setState({
+              currentlyDisplayed: newlyDisplayed,
+              showSearch: true,
+          });
+      }
+
   }
 
   render() {

@@ -32,6 +32,10 @@
   box-shadow: 0px -1px 43px -10px rgba(0,0,0,0.56);
 }
 
+.search:focus {
+    outline-width: 0;
+}
+
 .searchButton {
   margin-left: -70px;
   background: #10354B;
@@ -40,6 +44,10 @@
   border-top-right-radius: 30px;
   border-bottom-right-radius: 30px;
   color: white;
+}
+
+.searchButton:focus {
+    outline-width: 0;
 }
 
 @font-face {
