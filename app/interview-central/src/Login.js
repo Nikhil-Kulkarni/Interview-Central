@@ -1,29 +1,40 @@
 import React, { Component } from 'react';
 import Textbox from './views/textbox/textbox';
 import './Login.css';
+import PropTypes from 'prop-types';
 
 export default class Login extends Component {
 
-    componentWillMount() {
+    static propTypes = {
+        loginFunc: PropTypes.func.isRequired,
     }
 
-    login() {
-        
+    componentWillMount() {
+        this.login.bind(this);
+    }
+
+    login(event) {
+        let username = event.target.username.value;
+        let password = event.target.password.value;
+
+        this.props.loginFunc(username, password);
     }
 
     render() {
         return (
             <div className="Login">
                 <div className='headerTitle'>INTERVIEW CENTRAL</div>
-                <div className="box">
-                    <Textbox name="Username" placeholder="Username" />
-                </div>
-                <div className="box">
-                    <Textbox name="Password" placeholder="Password" />                
-                </div>
-                <div className="loginDiv">
-                    <button className="loginButton">LOGIN</button>
-                </div>
+                <form onSubmit={this.login.bind(this)}>
+                    <div className="box">
+                        <Textbox name="username" placeholder="Username" />
+                    </div>
+                    <div className="box">
+                        <Textbox name="password" placeholder="Password" />                
+                    </div>
+                    <div className="loginDiv">
+                        <button className="loginButton">LOGIN</button>
+                    </div>
+                </form>
             </div>
         );
     }
