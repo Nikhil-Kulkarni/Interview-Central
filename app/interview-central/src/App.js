@@ -52,8 +52,8 @@ export class App extends Component {
                   <Row center="xs" key={index}>
                     <Col xs={6}>
                       <Tile
-                        questionName={curSuite.suiteName}
-                        questionDescription={curSuite.questions.join()}
+                        suiteName={curSuite.suiteName}
+                        suiteQuestionNames={curSuite.questions.join()}
                         type="SMALL"
                         key={index}
                         />
