@@ -27,8 +27,6 @@ export class App extends Component {
   }
 
   onInputChange(event) {
-    console.log("Event");
-    console.log(event.target.value);
     if (event.target.value !== "") {
         let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
          || question.description.toLowerCase().includes(event.target.value.toLowerCase()));
@@ -63,7 +61,11 @@ export class App extends Component {
         <LogoutBar/>
         <div className='title'>INTERVIEW CENTRAL</div>
         {/* TODO: SEARCH BAR GOES HERE */}
-        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} />
+        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
+              if (event.key === "Enter") {
+                this.handleSearch();
+              }
+            }}/>
         <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
         {this.state.showSearch ?
             <div>
@@ -78,7 +80,7 @@ export class App extends Component {
             </div>
 
             :
-            
+
             <Row around="xs">
 
               <Col xs={6}>
