@@ -7,11 +7,16 @@ import { getAccountInfo } from './state/account/accountSelectors';
 export class LoginCont extends Component {
 
     componentWillMount() {
+        this.handleLoginDone = this.handleLoginDone.bind(this);
+    }
+
+    handleLoginDone(username, password) {
+        this.props.loginFunc(username, password);
     }
 
     render() {
         return (
-            <Login loginFunc={loginUserAction}/>
+            <Login loginFunc={this.handleLoginDone}/>
         );
     }
 }
@@ -22,8 +27,15 @@ const mapStateToProps = function(state) {
     };
 };
 
+const mapDispatchToProps = function(dispatch) {
+    return {
+        loginFunc: (username, password) => dispatch(loginUserAction(username, password)),
+    };
+};
+
 const LoginContainer = connect(
-    mapStateToProps,    
+    mapStateToProps, 
+    mapDispatchToProps,    
 ) (LoginCont);
 
 export default LoginContainer;
