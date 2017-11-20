@@ -2,12 +2,9 @@ import _ from 'lodash';
 
 export const getHomeData = (state) => {
     if (state.questions && state.questions.questions) {
-        let questionNames = state.home.mySuite;
-        console.log("State.home.mySuite");
-        console.log(state.home.mySuite);
-        // let questions = _.filter(state.questions.questions.Items, question => questionNames.includes(question.name));
+        let suites = state.home.mySuite;
         return {
-            mySuite: questionNames,
+            mySuite: suites,
             recommended: [],
         };
     } else {
