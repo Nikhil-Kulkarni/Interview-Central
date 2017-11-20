@@ -14,8 +14,6 @@ export class AppCont extends Component {
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
-        console.log("My Suite");
-        console.log(mySuite);
 
         if (this.props.success) {
             return (
