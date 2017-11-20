@@ -10,7 +10,7 @@ export function homeReducer(state = initialState, action) {
                 return state;
             } else {
                 return {
-                    mySuite: action.payload.Items[0].questions,
+                    mySuite: action.payload.Items,
                 };
             }
         case HOME_DATA_ERROR:

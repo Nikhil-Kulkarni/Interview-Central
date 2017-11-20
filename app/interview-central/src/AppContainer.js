@@ -7,13 +7,15 @@ import { getHomeData } from './state/home/homeSelectors';
 import { getHomeDataAction } from './state/home/homeActions';
 
 export class AppCont extends Component {
-    
+
     componentWillMount() {
     }
 
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
+        console.log("My Suite");
+        console.log(mySuite);
 
         if (this.props.success) {
             return (
@@ -25,7 +27,7 @@ export class AppCont extends Component {
                     <App questions={[]} mySuite={[]} recommended={[]}/>
                 </div>
             );
-        }       
+        }
     }
 }
 

@@ -47,13 +47,13 @@ export class App extends Component {
           <Col xs={6}>
             <Row>
               <Col xs={12}>
-                <div className='header'>MY SUITES</div>             
-                {this.props.mySuite.map((question, index) =>
+                <div className='header'>MY SUITES</div>
+                {this.props.mySuite.map((curSuite, index) =>
                   <Row center="xs" key={index}>
                     <Col xs={6}>
                       <Tile
-                        questionName={question.name}
-                        questionDescription={question.description}
+                        questionName={curSuite.suiteName}
+                        questionDescription={curSuite.questions}
                         type="SMALL"
                         key={index}
                         />
@@ -63,11 +63,11 @@ export class App extends Component {
               </Col>
             </Row>
           </Col>
-          
-          <Col xs={6}>          
+
+          <Col xs={6}>
             <Row>
               <Col xs={12}>
-                <div className='header'>RECOMMENDED</div>                           
+                <div className='header'>RECOMMENDED</div>
                 <Row center="xs">
                     <Col xs={6}>
                       <Tile
@@ -79,7 +79,7 @@ export class App extends Component {
                   </Row>
               </Col>
             </Row>
-          </Col>          
+          </Col>
 
         </Row>
 
