@@ -38,8 +38,18 @@ export default class Login extends Component {
                         <button className="loginButton">LOGIN</button>
                     </div>
                 </form>
+                <Button />
             </div>
         );
     }
 }
+
+const Button = withRouter(({ history }) => (
+    <div className="registerDiv">
+        <button
+            className="loginButton"
+            onClick={() => { history.push('/registration') }}
+        > REGISTER </button>
+    </div>
+));
   
