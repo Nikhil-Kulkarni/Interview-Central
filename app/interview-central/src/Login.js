@@ -2,11 +2,13 @@ import React, { Component } from 'react';
 import Textbox from './views/textbox/textbox';
 import './Login.css';
 import PropTypes from 'prop-types';
+import { withRouter } from 'react-router-dom';
 
 export default class Login extends Component {
 
     static propTypes = {
         loginFunc: PropTypes.func.isRequired,
+        accountState: PropTypes.object.isRequired,
     }
 
     componentWillMount() {
@@ -39,5 +41,5 @@ export default class Login extends Component {
             </div>
         );
     }
-
 }
+  

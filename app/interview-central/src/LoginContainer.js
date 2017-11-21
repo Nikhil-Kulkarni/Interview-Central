@@ -15,8 +15,14 @@ export class LoginCont extends Component {
     }
 
     render() {
+        const account = this.props.account;
+        if (account.done && account.success) {
+            this.props.history.push("/");
+            return <div />;
+        }
+
         return (
-            <Login loginFunc={this.handleLoginDone}/>
+            <Login loginFunc={this.handleLoginDone} accountState={this.props.account}/>
         );
     }
 }
