@@ -29,7 +29,8 @@ export function registerUserError() {
 export function registerUserAction(username, password) {
     return (dispatch) => {
         return registerUserAPI(username, password).then(([response, json]) => {
-            if (response.status === 200) { 
+            if (response.status === 200) {
+                console.log(response);
                 dispatch(registerUserSuccess(json));
             } else {
                 dispatch(registerUserError());
@@ -39,9 +40,10 @@ export function registerUserAction(username, password) {
 }
 
 export function registerUserAPI(username, password) {
+    console.log("RegisterUserAPI");
     const URL = `http://localhost:5000/register`;
-    return fetch(URL, 
-        { 
+    return fetch(URL,
+        {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -50,8 +52,8 @@ export function registerUserAPI(username, password) {
                 username: username,
                 password: password
             })
-        })
-        .then( response => Promise.all([response, response.json()]));
+        });
+        // .then( response => Promise.all([response, response.json()]));
 }
 
 export function loginUser() {
@@ -77,7 +79,7 @@ export function loginUserAction(username, password) {
     return (dispatch) => {
         return loginUserAPI(username, password).then(([response, json]) => {
             if (response.status === 200) {
-                dispatch(loginUserSuccess(json));                
+                dispatch(loginUserSuccess(json));
             } else {
                 dispatch(loginUserError());
             }
@@ -87,8 +89,8 @@ export function loginUserAction(username, password) {
 
 export function loginUserAPI(username, password) {
     const URL = `http://localhost:5000/login`;
-    return fetch(URL, 
-        { 
+    return fetch(URL,
+        {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
