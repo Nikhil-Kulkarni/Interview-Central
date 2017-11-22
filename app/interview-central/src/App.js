@@ -96,8 +96,8 @@ export class App extends Component {
                             description={curSuite.questions.join()}
                             type="SMALL"
                             key={index}
+                            linkId={curSuite.suiteId}
                           />
-                          <Link to={`/suite/${curSuite.suiteId}`}>More Info</Link>
                         </Col>
                       </Row>
                     )}
