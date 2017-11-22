@@ -83,7 +83,10 @@ def getSuite(suiteId):
     filtering_exp = Key("suiteId").eq(suiteId)
     response = suitesTable.scan(FilterExpression=filtering_exp)
 
-    return jsonify(response["Items"][0])
+    if response["Count"] == 1:
+        return jsonify(response["Items"][0])
+    else:
+        return jsonify({})
 
 @app.route("/register", methods=['POST'])
 def registerUser():
