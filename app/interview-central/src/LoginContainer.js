@@ -23,7 +23,7 @@ export class LoginCont extends Component {
 
         return (
             <Login loginFunc={this.handleLoginDone} accountState={this.props.account}/>
-        );
+        ); 
     }
 }
 

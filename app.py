@@ -1,6 +1,7 @@
 import boto3
 import json
 import programcreek
+import uuid
 from flask import Flask
 from flask import jsonify
 from flask_cors import CORS
@@ -61,14 +62,17 @@ def createSuite():
     person = jsonBody["person"]
     suiteName = jsonBody["suiteName"]
     questions = jsonBody["questions"]
+    suiteId = uuid.uuid4().hex
 
     response = suitesTable.put_item(
         Item={
             'suiteName':str(suiteName),
             'person':str(person),
-            'questions':questions
+            'questions':questions,
+            'suiteId':str(suiteId)
         }
     )
+
     return jsonify(response)
 
 @app.route("/register", methods=['POST'])
