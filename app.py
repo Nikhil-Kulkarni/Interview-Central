@@ -75,6 +75,16 @@ def createSuite():
 
     return jsonify(response)
 
+@app.route("/getSuite/<suiteId>", methods=['GET'])
+def getSuite(suiteId):
+    dynamodb = boto3.resource('dynamodb')
+    suitesTable = dynamodb.Table('interview-suites')
+
+    filtering_exp = Key("suiteId").eq(suiteId)
+    response = suitesTable.scan(FilterExpression=filtering_exp)
+
+    return jsonify(response["Items"][0])
+
 @app.route("/register", methods=['POST'])
 def registerUser():
     dynamodb = boto3.resource('dynamodb')
