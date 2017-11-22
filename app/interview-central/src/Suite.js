@@ -18,7 +18,7 @@ export default class Suite extends Component {
             return (
                 <div className="Suite">
                     <LogoutBar/>
-                    <div className='suiteName'>{this.props.suite.suiteName}</div>
+                    <div className='suiteName'>Suite: {this.props.suite.suiteName}</div>
                     {/* GET QUESTION DESCRIPTION FROM REDUX */}
                     {this.props.suite.questions.map((question, index) => 
                         <Tile

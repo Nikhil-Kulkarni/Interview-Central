@@ -124,10 +124,6 @@ export class App extends Component {
 
             </Row>
         }
-
-
-        {/* TODO: ALL INTERVIEW QUESTIONS BELOW. SEARCHING ONLY WORKS ON THIS BC WE USING STATE.CURRENTLYDISPLAYED */}
-
       </div>
     );
   }
