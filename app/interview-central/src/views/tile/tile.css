@@ -47,9 +47,13 @@
     position: absolute;
     bottom: 10px;
     right: 0;
+    background-color: white;
+    border-radius: 5px; 
 }
 
 .hyperlink {
-    color: white;
+    color: #10354B;
+    font-size: 14px;
     text-decoration: none;
+    padding: 10px;
 }

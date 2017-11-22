@@ -25,7 +25,6 @@ export class SuiteCont extends Component {
     }
 
     render() {
-
         return (
             <div>
                 <Suite suite={this.state.suite}/>

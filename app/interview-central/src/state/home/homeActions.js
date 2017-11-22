@@ -25,7 +25,6 @@ export function getHomeDataError() {
 
 export function getHomeDataAction() {
     return (dispatch) => {
-        // dispatch(getQuestions());
         return getHomeDataAPI().then(([response, json]) => {
             if (response.status === 200) {
                 dispatch(getHomeDataSuccess(json));                
