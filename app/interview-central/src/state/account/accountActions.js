@@ -30,7 +30,7 @@ export function registerUserAction(username, password) {
     return (dispatch) => {
         return registerUserAPI(username, password).then(([response, json]) => {
             if (response.status === 200) {
-                console.log(response);
+                (response);
                 dispatch(registerUserSuccess(json));
             } else {
                 dispatch(registerUserError());
@@ -40,7 +40,6 @@ export function registerUserAction(username, password) {
 }
 
 export function registerUserAPI(username, password) {
-    console.log("RegisterUserAPI");
     const URL = `http://localhost:5000/register`;
     return fetch(URL,
         {

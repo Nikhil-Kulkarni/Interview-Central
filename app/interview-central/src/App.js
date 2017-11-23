@@ -5,7 +5,6 @@ import LogoutBar from './views/topbar/components/logoutbar';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 
 export class App extends Component {
 

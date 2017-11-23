@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, REGISTER_SUCCESS, REGISTER_ERROR } from './accountActions';
+import { LOGIN_SUCCESS, LOGIN_ERROR } from './accountActions';
 
 const initialState = { done: false };
 

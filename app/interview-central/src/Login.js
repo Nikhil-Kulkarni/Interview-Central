@@ -29,10 +29,10 @@ export default class Login extends Component {
                 <div className='headerTitle'>INTERVIEW CENTRAL</div>
                 <form onSubmit={this.login.bind(this)}>
                     <div className="box">
-                        <Textbox name="username" placeholder="Username" />
+                        <Textbox name="username" placeholder="Username" password={false} />
                     </div>
                     <div className="box">
-                        <Textbox name="password" placeholder="Password" />                
+                        <Textbox name="password" placeholder="Password" password={true} />                
                     </div>
                     <div className="loginDiv">
                         <button className="loginButton">LOGIN</button>
@@ -48,7 +48,7 @@ const Button = withRouter(({ history }) => (
     <div className="registerDiv">
         <button
             className="loginButton"
-            onClick={() => { history.push('/registration') }}
+            onClick={() => { history.push('/register') }}
         > REGISTER </button>
     </div>
 ));
