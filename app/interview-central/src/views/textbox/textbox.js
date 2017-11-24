@@ -5,7 +5,8 @@ import './textbox.css';
 export default class Textbox extends Component {
     static propTypes = {
         name: PropTypes.string.isRequired,
-        placeholder: PropTypes.string
+        placeholder: PropTypes.string,
+        password: PropTypes.bool.isRequired,
     }
 
     render() {
@@ -13,6 +14,19 @@ export default class Textbox extends Component {
             name,
             placeholder,
         } = this.props;
+
+        if (this.props.password) {
+            return (
+                <div className="form-group">
+                    <input
+                        className="textbox"
+                        name={name}
+                        placeholder={placeholder}
+                        type="password"
+                     />
+                </div>
+            );
+        }
 
         return (
             <div className="form-group">

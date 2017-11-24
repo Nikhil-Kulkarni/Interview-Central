@@ -23,10 +23,9 @@ export function getHomeDataError() {
     };
 }
 
-export function getHomeDataAction() {
+export function getHomeDataAction(username) {
     return (dispatch) => {
-        // dispatch(getQuestions());
-        return getHomeDataAPI().then(([response, json]) => {
+        return getHomeDataAPI(username).then(([response, json]) => {
             if (response.status === 200) {
                 dispatch(getHomeDataSuccess(json));                
             } else {
@@ -36,9 +35,9 @@ export function getHomeDataAction() {
     }
 }
 
-export function getHomeDataAPI() {
+export function getHomeDataAPI(username) {
     // TODO: REMOVE HARDCODED USERNAME LATER
-    const URL = `http://localhost:5000/getHomeData/nikhil`;
+    const URL = `http://localhost:5000/getHomeData/${username}`;
     return fetch(URL, { method: 'GET'})
         .then( response => Promise.all([response, response.json()]));
 }

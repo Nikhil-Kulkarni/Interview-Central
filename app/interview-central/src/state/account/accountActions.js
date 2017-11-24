@@ -6,6 +6,7 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTER_USER = "REGISTER_USER";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_ERROR = "REGISTER_ERROR";
+export const LOGOUT = "LOGOUT";
 
 export function registerUser() {
     return {
@@ -30,7 +31,6 @@ export function registerUserAction(username, password) {
     return (dispatch) => {
         return registerUserAPI(username, password).then(([response, json]) => {
             if (response.status === 200) {
-                console.log(response);
                 dispatch(registerUserSuccess(json));
             } else {
                 dispatch(registerUserError());
@@ -40,7 +40,6 @@ export function registerUserAction(username, password) {
 }
 
 export function registerUserAPI(username, password) {
-    console.log("RegisterUserAPI");
     const URL = `http://localhost:5000/register`;
     return fetch(URL,
         {
@@ -101,4 +100,10 @@ export function loginUserAPI(username, password) {
             })
         })
         .then( response => Promise.all([response, response.json()]));
+}
+
+export function logout() {
+    return {
+        type: LOGOUT,
+    };
 }

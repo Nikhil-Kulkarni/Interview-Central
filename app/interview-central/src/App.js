@@ -5,7 +5,6 @@ import LogoutBar from './views/topbar/components/logoutbar';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import _ from 'lodash';
-import { Link } from 'react-router-dom';
 
 export class App extends Component {
 
@@ -13,6 +12,7 @@ export class App extends Component {
     questions: PropTypes.array.isRequired,
     mySuite: PropTypes.array.isRequired,
     recommended: PropTypes.array.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
@@ -60,7 +60,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <LogoutBar/>
+        <LogoutBar loggedIn={this.props.loggedIn} />
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
               if (event.key === "Enter") {
@@ -88,6 +88,8 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
+                    {/* TODO: MAKE THIS LOOK NICER */}
+                    {this.props.mySuite.length === 0 ? "Login to View Suites" : ""}
                     {this.props.mySuite.map((curSuite, index) =>
                       <Row center="xs" key={index}>
                         <Col xs={6}>

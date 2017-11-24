@@ -23,7 +23,6 @@ export default class Registration extends Component {
         let confirmPassword = event.target.confirmPassword.value;
 
         if (password === confirmPassword) {
-            console.log("Matching");
             this.props.registrationFunc(username, password);
         } else {
             this.setState({
@@ -39,13 +38,13 @@ export default class Registration extends Component {
                 <div className='headerTitle'>INTERVIEW CENTRAL</div>
                 <form onSubmit={this.login.bind(this)}>
                     <div className="box">
-                        <Textbox name="username" placeholder="Username" />
+                        <Textbox name="username" placeholder="Username" password={false} />
                     </div>
                     <div className="box">
-                        <Textbox name="password" placeholder="Password" />
+                        <Textbox name="password" placeholder="Password" password={true} />
                     </div>
                     <div className="box">
-                        <Textbox name="confirmPassword" placeholder="Confirm Password" />
+                        <Textbox name="confirmPassword" placeholder="Confirm Password" password={true} />
                     </div>
                     <div className="loginDiv">
                         <button className="loginButton">REGISTER</button>

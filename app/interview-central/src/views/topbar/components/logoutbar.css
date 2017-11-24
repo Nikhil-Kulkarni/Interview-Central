@@ -9,3 +9,10 @@
     margin-right: 20px;
     margin-top: 25px;
 }
+
+.logLink {
+    color: #10354B;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px;
+}

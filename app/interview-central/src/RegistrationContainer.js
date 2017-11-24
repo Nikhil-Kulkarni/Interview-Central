@@ -12,15 +12,10 @@ export class RegistrationCont extends Component {
 
     handleRegistrationDone(username, password) {
         // this.props.registrationFunc(username, password);
-        console.log("handleRegistrationDone");
         registerUserAPI(username, password)
             .then(response => {
-                console.log("Response");
-                // console.log(response.json());
                 return response.json();
             }).then(json => {
-                console.log("JSON");
-                console.log(json);
                 this.props.history.push("/login");
             });
 

@@ -1,6 +1,6 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, REGISTER_SUCCESS, REGISTER_ERROR } from './accountActions';
+import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from './accountActions';
 
-const initialState = { done: false };
+const initialState = { done: false, success: false, };
 
 export function accountReducer(state = initialState, action) {
     switch(action.type) {
@@ -23,7 +23,10 @@ export function accountReducer(state = initialState, action) {
             return {
                 done: true,
                 error: true,
+                success: false,
             }
+        case LOGOUT:
+            return initialState;
         default:
             return state;
     }
