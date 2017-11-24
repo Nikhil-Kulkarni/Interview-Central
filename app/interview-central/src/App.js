@@ -13,6 +13,7 @@ export class App extends Component {
     mySuite: PropTypes.array.isRequired,
     recommended: PropTypes.array.isRequired,
     loggedIn: PropTypes.bool.isRequired,
+    saveSuite: PropTypes.func,
   };
 
   componentWillMount() {
@@ -20,11 +21,15 @@ export class App extends Component {
       searchTerm: '',
       currentlyDisplayed: this.props.questions,
       newlyDisplayed: this.props.questions,
-      showSearch: false
+      showSearch: false,
+      createSuite: false,
+      suiteListIds: [],
     };
 
     this.onInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
+    this.handleCheckChangeFunc = this.handleCheckChangeFunc.bind(this);
   }
 
   onInputChange(event) {
@@ -57,10 +62,34 @@ export class App extends Component {
 
   }
 
+  handleToggleCreateSuite(curState) {
+      // If curState is false, save the suite
+      if (!curState) {
+          var tempSuiteIds = this.state.suiteListIds;
+          this.setState({
+              suiteListIds: [],
+          });
+          this.props.saveSuite(tempSuiteIds);
+      }
+      this.setState({
+          createSuite: curState,
+      });
+  }
+
+  handleCheckChangeFunc(id) {
+      var idIndex = this.state.suiteListIds.indexOf(id)
+      if (idIndex === -1) {
+          this.state.suiteListIds.push(id);
+      } else {
+          this.state.suiteListIds.splice(idIndex, 1);
+      }
+    //   console.log("Group List: " + this.state.suiteListIds);
+  }
+
   render() {
     return (
       <div className="App">
-        <LogoutBar loggedIn={this.props.loggedIn} />
+        <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite}/>
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
               if (event.key === "Enter") {
@@ -68,7 +97,7 @@ export class App extends Component {
               }
             }}/>
         <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
-        {this.state.showSearch ?
+        {this.state.showSearch || this.state.createSuite ?
             <div>
             {this.state.currentlyDisplayed.map((question, index) =>
               <Tile
@@ -76,6 +105,8 @@ export class App extends Component {
                 description={question.description}
                 type="BIG"
                 key={index}
+                createSuite={this.state.createSuite}
+                checkChangeFunc={this.handleCheckChangeFunc}
               />
             )}
             </div>
@@ -99,6 +130,8 @@ export class App extends Component {
                             type="SMALL"
                             key={index}
                             linkId={curSuite.suiteId}
+                            createSuite={this.state.createSuite}
+                            checkChangeFunc={this.handleCheckChangeFunc}
                           />
                         </Col>
                       </Row>

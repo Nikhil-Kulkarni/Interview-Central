@@ -6,27 +6,40 @@ import { getQuestionsAction } from './state/questions/questionsActions';
 import { getHomeData } from './state/home/homeSelectors';
 import { getHomeDataAction } from './state/home/homeActions';
 import { getAccountInfo } from './state/account/accountSelectors';
+import { callCreateSuiteAPI } from './state/suites/suitesActions';
 
 export class AppCont extends Component {
 
     componentWillMount() {
+        this.handleSaveSuite = this.handleSaveSuite.bind(this);
+    }
+
+    handleSaveSuite(suiteListIds) {
+        callCreateSuiteAPI("testSuiteName", this.props.account.username, suiteListIds)
+            .then(response => {
+                console.log("Response");
+                return response.json();
+            }).then(json => {
+                console.log("JSON");
+                console.log(json);
+            });
     }
 
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
         if (this.props.account.success) {
-            this.props.getHomeData(this.props.account.username);        
+            this.props.getHomeData(this.props.account.username);
         }
 
         if (this.props.success && this.props.account.done) {
             return (
-                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account.success}/>
+                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account.success} saveSuite={this.handleSaveSuite}/>
             );
         } else {
             return (
                 <div>
-                    <App questions={[]} mySuite={[]} recommended={[]} loggedIn={false}/>
+                    <App questions={[]} mySuite={[]} recommended={[]} loggedIn={false} saveSuite={this.handleSaveSuite}/>
                 </div>
             );
         }

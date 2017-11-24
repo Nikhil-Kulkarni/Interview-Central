@@ -18,7 +18,6 @@ export class RegistrationCont extends Component {
             }).then(json => {
                 this.props.history.push("/login");
             });
-
     }
 
     render() {

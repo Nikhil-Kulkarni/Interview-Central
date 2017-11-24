@@ -8,14 +8,27 @@ import { connect } from 'react-redux';
 export class LogoutB extends Component {
     static propTypes = {
         loggedIn: PropTypes.bool.isRequired,
+        createSuite: PropTypes.bool.isRequired,
+        toggleCreateSuite: PropTypes.func.isRequired,
     }
 
     componentWillMount() {
         this.handleLogout = this.handleLogout.bind(this);
+        this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
     }
 
     handleLogout() {
         this.props.logout();
+    }
+
+    handleToggleCreateSuite() {
+        if (this.props.createSuite) {
+            //Clicked on "Save Suite"
+            this.props.toggleCreateSuite(false);
+        } else {
+            // Clicked on "Create Suite"
+            this.props.toggleCreateSuite(true);
+        }
     }
 
     render() {
@@ -24,13 +37,16 @@ export class LogoutB extends Component {
                 <div className="logoutText">
                     {this.props.loggedIn ? <div className='logLink' onClick={this.handleLogout}>Logout</div> : <Link className='logLink' to="/login">Login</Link>}
                 </div>
+                <div className="logoutText">
+                    {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                </div>
             </div>
         );
     }
 }
 
 const mapStateToProps = function(state) {
-    return {      
+    return {
     };
 };
 
@@ -41,8 +57,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
 };
 
 const LogoutBar = connect(
-    mapStateToProps, 
-    mapDispatchToProps,    
+    mapStateToProps,
+    mapDispatchToProps,
 ) (LogoutB);
 
 export default LogoutBar;
