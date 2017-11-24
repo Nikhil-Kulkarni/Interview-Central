@@ -22,7 +22,7 @@ export class RegistrationCont extends Component {
                 console.log("JSON");
                 console.log(json);
                 this.props.history.push("/login");
-            })
+            });
 
     }
 
