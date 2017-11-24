@@ -5,6 +5,7 @@ import { getQuestions, getSuccess } from './state/questions/questionsSelectors';
 import { getQuestionsAction } from './state/questions/questionsActions';
 import { getHomeData } from './state/home/homeSelectors';
 import { getHomeDataAction } from './state/home/homeActions';
+import { getAccountInfo } from './state/account/accountSelectors';
 
 export class AppCont extends Component {
 
@@ -14,8 +15,11 @@ export class AppCont extends Component {
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
+        if (this.props.account.username) {
+            this.props.getHomeData(this.props.account.username);        
+        }
 
-        if (this.props.success) {
+        if (this.props.success && this.props.account.done) {
             return (
                 <App questions={items.questions.Items} mySuite={mySuite} recommended={[]}/>
             );
@@ -34,13 +38,14 @@ const mapStateToProps = function(state) {
         questions: getQuestions(state),
         success: getSuccess(state),
         homeData: getHomeData(state),
+        account: getAccountInfo(state),
     };
 };
 
 const mapDispatchToProps = function(dispatch) {
     return {
         getQuestions: dispatch(getQuestionsAction()),
-        getHomeData: dispatch(getHomeDataAction()),
+        getHomeData: (username) => dispatch(getHomeDataAction(username)),
     };
 };
 

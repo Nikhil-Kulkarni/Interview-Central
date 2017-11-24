@@ -87,6 +87,8 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
+                    {/* TODO: MAKE THIS LOOK NICER */}
+                    {this.props.mySuite.length === 0 ? "Login to View Suites" : ""}
                     {this.props.mySuite.map((curSuite, index) =>
                       <Row center="xs" key={index}>
                         <Col xs={6}>
