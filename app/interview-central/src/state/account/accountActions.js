@@ -6,6 +6,7 @@ export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTER_USER = "REGISTER_USER";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
 export const REGISTER_ERROR = "REGISTER_ERROR";
+export const LOGOUT = "LOGOUT";
 
 export function registerUser() {
     return {
@@ -99,4 +100,10 @@ export function loginUserAPI(username, password) {
             })
         })
         .then( response => Promise.all([response, response.json()]));
+}
+
+export function logout() {
+    return {
+        type: LOGOUT,
+    };
 }

@@ -5,6 +5,7 @@ import Suite from './Suite';
 import { getSuite } from './state/suites/suitesActions';
 import { getQuestions } from './state/questions/questionsSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
+import { getQuestionsAction } from './state/questions/questionsActions';
 
 export class SuiteCont extends Component {
 
@@ -28,7 +29,7 @@ export class SuiteCont extends Component {
     }
 
     render() {
-        if (this.state.suite.questions && this.props.questions.questions && this.props.account.done) {
+        if (this.state.suite.questions && this.props.questions.questions) {
             let items = this.props.questions.questions.questions.Items;        
             let questions = _.filter(items, question => this.state.suite.questions.includes(question.name)); 
             let suite = {
@@ -60,6 +61,7 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
+        getQuestions: dispatch(getQuestionsAction()),        
     };
 };
 
