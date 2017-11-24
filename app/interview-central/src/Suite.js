@@ -19,11 +19,10 @@ export default class Suite extends Component {
                 <div className="Suite">
                     <LogoutBar/>
                     <div className='suiteName'>Suite: {this.props.suite.suiteName}</div>
-                    {/* GET QUESTION DESCRIPTION FROM REDUX */}
                     {this.props.suite.questions.map((question, index) => 
                         <Tile
-                            name={question}
-                            description={question}
+                            name={question.name}
+                            description={question.description}
                             type="BIG"
                             key={index}
                         />

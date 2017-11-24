@@ -30,7 +30,6 @@ export function registerUserAction(username, password) {
     return (dispatch) => {
         return registerUserAPI(username, password).then(([response, json]) => {
             if (response.status === 200) {
-                (response);
                 dispatch(registerUserSuccess(json));
             } else {
                 dispatch(registerUserError());

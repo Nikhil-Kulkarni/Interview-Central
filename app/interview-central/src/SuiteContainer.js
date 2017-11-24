@@ -1,7 +1,9 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Suite from './Suite';
 import { getSuite } from './state/suites/suitesActions';
+import { getQuestions } from './state/questions/questionsSelectors';
 
 export class SuiteCont extends Component {
 
@@ -25,9 +27,24 @@ export class SuiteCont extends Component {
     }
 
     render() {
+        if (this.state.suite.questions && this.props.questions.questions) {
+            let items = this.props.questions.questions.questions.Items;        
+            let questions = _.filter(items, question => this.state.suite.questions.includes(question.name)); 
+            let suite = {
+                suiteName: this.state.suite.suiteName,
+                questions: questions,
+            };
+
+            return (
+                <div>
+                    <Suite suite={suite}/>
+                </div>
+            );
+        }
+
         return (
             <div>
-                <Suite suite={this.state.suite}/>
+                <Suite suite={{}}/>
             </div>
         );
     }
@@ -35,6 +52,7 @@ export class SuiteCont extends Component {
 
 const mapStateToProps = function(state) {
     return {
+        questions: getQuestions(state),
     };
 };
 
