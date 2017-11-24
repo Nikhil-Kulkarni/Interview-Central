@@ -21,12 +21,12 @@ export class AppCont extends Component {
 
         if (this.props.success && this.props.account.done) {
             return (
-                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]}/>
+                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account.success}/>
             );
         } else {
             return (
                 <div>
-                    <App questions={[]} mySuite={[]} recommended={[]}/>
+                    <App questions={[]} mySuite={[]} recommended={[]} loggedIn={false}/>
                 </div>
             );
         }

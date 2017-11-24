@@ -8,6 +8,7 @@ export default class Suite extends Component {
 
     static propTypes = {
         suite: PropTypes.object.isRequired,
+        loggedIn: PropTypes.bool.isRequired,
     }
 
     componentWillMount() {
@@ -17,7 +18,7 @@ export default class Suite extends Component {
         if (this.props.suite.questions) {
             return (
                 <div className="Suite">
-                    <LogoutBar/>
+                    <LogoutBar loggedIn={this.props.loggedIn} />
                     <div className='suiteName'>Suite: {this.props.suite.suiteName}</div>
                     {this.props.suite.questions.map((question, index) => 
                         <Tile

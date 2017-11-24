@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Suite from './Suite';
 import { getSuite } from './state/suites/suitesActions';
 import { getQuestions } from './state/questions/questionsSelectors';
+import { getAccountInfo } from './state/account/accountSelectors';
 
 export class SuiteCont extends Component {
 
@@ -27,7 +28,7 @@ export class SuiteCont extends Component {
     }
 
     render() {
-        if (this.state.suite.questions && this.props.questions.questions) {
+        if (this.state.suite.questions && this.props.questions.questions && this.props.account.done) {
             let items = this.props.questions.questions.questions.Items;        
             let questions = _.filter(items, question => this.state.suite.questions.includes(question.name)); 
             let suite = {
@@ -37,14 +38,14 @@ export class SuiteCont extends Component {
 
             return (
                 <div>
-                    <Suite suite={suite}/>
+                    <Suite suite={suite} loggedIn={this.props.account.success}/>
                 </div>
             );
         }
 
         return (
             <div>
-                <Suite suite={{}}/>
+                <Suite suite={{}} loggedIn={false}/>
             </div>
         );
     }
@@ -53,6 +54,7 @@ export class SuiteCont extends Component {
 const mapStateToProps = function(state) {
     return {
         questions: getQuestions(state),
+        account: getAccountInfo(state),        
     };
 };
 

@@ -12,6 +12,7 @@ export class App extends Component {
     questions: PropTypes.array.isRequired,
     mySuite: PropTypes.array.isRequired,
     recommended: PropTypes.array.isRequired,
+    loggedIn: PropTypes.bool.isRequired,
   };
 
   componentWillMount() {
@@ -59,7 +60,7 @@ export class App extends Component {
   render() {
     return (
       <div className="App">
-        <LogoutBar/>
+        <LogoutBar loggedIn={this.props.loggedIn} />
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
               if (event.key === "Enter") {
