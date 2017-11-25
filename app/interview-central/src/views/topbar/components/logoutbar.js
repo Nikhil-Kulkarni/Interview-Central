@@ -32,13 +32,23 @@ export class LogoutB extends Component {
     }
 
     render() {
+        if (this.props.loggedIn) {
+            return (
+                <div className='logoutContainer'>
+                    <div className="logoutText">
+                        <div className='logLink' onClick={this.handleLogout}>Logout</div>
+                    </div>
+                    <div className="logoutText">
+                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                    </div>
+                </div>
+            );
+        }
+
         return (
             <div className='logoutContainer'>
                 <div className="logoutText">
-                    {this.props.loggedIn ? <div className='logLink' onClick={this.handleLogout}>Logout</div> : <Link className='logLink' to="/login">Login</Link>}
-                </div>
-                <div className="logoutText">
-                    {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                    <Link className='logLink' to="/login">Login</Link>
                 </div>
             </div>
         );
