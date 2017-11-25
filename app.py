@@ -30,7 +30,8 @@ def update_database():
                     'name':str(name),
                     'description':description,
                     'link':str(link),
-                    'source':str(source)
+                    'source':str(source),
+                    'id':str(uuid.uuid4().hex)
                 }
             )
 
@@ -42,6 +43,19 @@ def getLeetcodeQuestions():
 
     questions = interviewQuestionsTable.scan()
     return jsonify(questions)
+
+@app.route("/question/<questionId>")
+def getQuestionWithId(questionId):
+    dynamodb = boto3.resource('dynamodb')
+    interviewQuestionsTable = dynamodb.Table('interview-questions')
+
+    filtering_exp = Key("id").eq(questionId)
+    response = interviewQuestionsTable.scan(FilterExpression=filtering_exp)
+
+    if response["Count"] == 1:
+        return jsonify(response["Items"][0])
+    else:
+        return jsonify({})
 
 @app.route("/getHomeData/<username>")
 def getHomeData(username):
@@ -126,3 +140,6 @@ def loginUser():
             return jsonify({"success": True, "username": username})
         else:
             return jsonify({"success": False, "error": "Incorrect password"})
+
+if __name__ == "__main__":
+    update_database()
