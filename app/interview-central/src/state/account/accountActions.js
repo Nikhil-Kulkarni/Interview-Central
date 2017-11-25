@@ -2,6 +2,7 @@ import fetch from 'isomorphic-fetch';
 
 export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FB_SUCCESS = "LOGIN_FB_SUCCESS";
 export const LOGIN_ERROR = "LOGIN_ERROR";
 export const REGISTER_USER = "REGISTER_USER";
 export const REGISTER_SUCCESS = "REGISTER_SUCCESS";
@@ -72,6 +73,13 @@ export function loginUserError() {
     return {
         type: LOGIN_ERROR,
     };
+}
+
+export function loginWithFb(userID) {
+    return {
+        type: LOGIN_FB_SUCCESS,
+        userID: userID,
+    }
 }
 
 export function loginUserAction(username, password) {

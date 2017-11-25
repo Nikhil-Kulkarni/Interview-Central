@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
-import { loginUserAction } from './state/account/accountActions';
+import { loginUserAction, loginWithFb } from './state/account/accountActions';
 import { getHomeDataAction } from './state/home/homeActions';
 import { getAccountInfo } from './state/account/accountSelectors';
 
@@ -9,10 +9,15 @@ export class LoginCont extends Component {
 
     componentWillMount() {
         this.handleLoginDone = this.handleLoginDone.bind(this);
+        this.handleFBLoginDone = this.handleFBLoginDone.bind(this);
     }
 
     handleLoginDone(username, password) {
         this.props.loginFunc(username, password);
+    }
+
+    handleFBLoginDone(userID) {
+        this.props.loginWithFb(userID);
     }
 
     render() {
@@ -24,7 +29,7 @@ export class LoginCont extends Component {
         }
 
         return (
-            <Login loginFunc={this.handleLoginDone} accountState={this.props.account}/>
+            <Login loginFunc={this.handleLoginDone} loginFBFunc={this.handleFBLoginDone} accountState={this.props.account}/>
         ); 
     }
 }
@@ -39,6 +44,7 @@ const mapDispatchToProps = function(dispatch) {
     return {
         getHomeData: (username) => dispatch(getHomeDataAction(username)),        
         loginFunc: (username, password) => dispatch(loginUserAction(username, password)),
+        loginWithFb: (userID) => dispatch(loginWithFb(userID)),
     };
 };
 

@@ -1,4 +1,4 @@
-import { LOGIN_SUCCESS, LOGIN_ERROR, LOGOUT } from './accountActions';
+import { LOGIN_SUCCESS, LOGIN_FB_SUCCESS, LOGIN_ERROR, LOGOUT } from './accountActions';
 
 const initialState = { done: false, success: false, };
 
@@ -18,6 +18,12 @@ export function accountReducer(state = initialState, action) {
                     success: false,
                     error: action.payload.error
                 }
+            }
+        case LOGIN_FB_SUCCESS:
+            return {
+                done: true,
+                success: true,
+                username: action.userID,
             }
         case LOGIN_ERROR:
             return {

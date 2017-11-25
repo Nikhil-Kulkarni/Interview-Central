@@ -78,6 +78,7 @@ export class App extends Component {
 
   handleCheckChangeFunc(id) {
       var idIndex = this.state.suiteListIds.indexOf(id)
+      console.log(id);
       if (idIndex === -1) {
           this.state.suiteListIds.push(id);
       } else {

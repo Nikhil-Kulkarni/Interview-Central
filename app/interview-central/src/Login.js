@@ -3,16 +3,19 @@ import Textbox from './views/textbox/textbox';
 import './Login.css';
 import PropTypes from 'prop-types';
 import { withRouter } from 'react-router-dom';
+import FacebookLogin from 'react-facebook-login';
 
 export default class Login extends Component {
 
     static propTypes = {
         loginFunc: PropTypes.func.isRequired,
+        loginFBFunc: PropTypes.func.isRequired,
         accountState: PropTypes.object.isRequired,
     }
 
     componentWillMount() {
         this.login.bind(this);
+        this.responseFacebook = this.responseFacebook.bind(this);
     }
 
     login(event) {
@@ -21,6 +24,11 @@ export default class Login extends Component {
         let password = event.target.password.value;
 
         this.props.loginFunc(username, password);
+    }
+
+    responseFacebook(response) {
+        let userID = response.userID;
+        this.props.loginFBFunc(userID);
     }
 
     render() {
@@ -39,6 +47,14 @@ export default class Login extends Component {
                     </div>
                 </form>
                 <Button />
+                <div className="fbLogin">
+                    <FacebookLogin
+                        appId="1928978060689017"
+                        autoLoad={true}
+                        fields="name,email,picture"
+                        callback={this.responseFacebook} 
+                    />
+                </div>
             </div>
         );
     }
