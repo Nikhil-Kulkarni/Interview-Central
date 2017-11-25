@@ -120,22 +120,24 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
-                    {this.props.loggedIn ? "" : <div className="loginRequest">Login to View Suites</div>}
-                    {this.props.mySuite.map((curSuite, index) =>
-                      <Row center="xs" key={index}>
-                        <Col xs={6}>
-                          <Tile
-                            name={curSuite.suiteName}
-                            description={curSuite.questions.join()}
-                            type="SMALL"
-                            key={index}
-                            linkId={curSuite.suiteId}
-                            createSuite={this.state.createSuite}
-                            checkChangeFunc={this.handleCheckChangeFunc}
-                          />
-                        </Col>
-                      </Row>
-                    )}
+                    {this.props.loggedIn ? 
+                      this.props.mySuite.map((curSuite, index) =>
+                        <Row center="xs" key={index}>
+                          <Col xs={6}>
+                            <Tile
+                              name={curSuite.suiteName}
+                              description={curSuite.questions.join()}
+                              type="SMALL"
+                              key={index}
+                              linkId={curSuite.suiteId}
+                              createSuite={this.state.createSuite}
+                              checkChangeFunc={this.handleCheckChangeFunc}
+                            />
+                          </Col>
+                        </Row>
+                      )
+                    : 
+                    <div className="loginRequest">Login to View Suites</div>}
                   </Col>
                 </Row>
               </Col>
@@ -144,8 +146,8 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>RECOMMENDED</div>
-                    {this.props.loggedIn ? "" : <div className="loginRequest">Login to View Recommended</div>}                    
-                    <Row center="xs">
+                    {this.props.loggedIn ? 
+                      <Row center="xs">
                         <Col xs={6}>
                           <Tile
                             name="Recommended"
@@ -154,6 +156,8 @@ export class App extends Component {
                             />
                         </Col>
                       </Row>
+                    : 
+                    <div className="loginRequest">Login to View Recommended</div>}                    
                   </Col>
                 </Row>
               </Col>
