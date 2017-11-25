@@ -44,7 +44,6 @@ export default class Tile extends Component {
             name,
             description,
         } = this.props;
-
         return (
             <div className={this.props.type === "BIG" ? 'big' : 'small'}>
                 <h5 className='boxText'>{name}</h5>
@@ -59,7 +58,7 @@ export default class Tile extends Component {
                     </FacebookShareButton>  
                 </div>
                 <div className='link'>
-                    {this.props.linkId !== null ? <Link className='hyperlink' to={`/suite/${this.props.linkId}`}>More Info</Link> : <div />}
+                    {this.props.linkId ? <Link className='hyperlink' to={this.props.linkId}>More Info</Link> : <div />}
                 </div>             
             </div>
         );

@@ -41,3 +41,8 @@ export function getQuestionsAPI() {
     return fetch(URL, { method: 'GET'})
         .then( response => Promise.all([response, response.json()]));
 }
+
+export function getQuestionWithIdAPI(questionId) {
+    const URL = `http://localhost:5000/question/${questionId}`;
+    return fetch(URL, { method: 'GET'});
+}

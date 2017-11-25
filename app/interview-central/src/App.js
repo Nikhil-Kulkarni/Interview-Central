@@ -105,6 +105,7 @@ export class App extends Component {
                 description={question.description}
                 type="BIG"
                 tileLink={question.link}
+                linkId={`/question/${question.id}`}
                 key={index}
                 createSuite={this.state.createSuite}
                 checkChangeFunc={this.handleCheckChangeFunc}
@@ -129,7 +130,7 @@ export class App extends Component {
                               description={curSuite.questions.join()}
                               type="SMALL"
                               key={index}
-                              linkId={curSuite.suiteId}
+                              linkId={`/suite/${curSuite.suiteId}`}
                               createSuite={this.state.createSuite}
                               checkChangeFunc={this.handleCheckChangeFunc}
                             />
