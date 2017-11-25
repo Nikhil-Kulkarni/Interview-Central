@@ -39,6 +39,14 @@
     clear: both;
 }
 
+.shareLink {
+    float: left;
+    margin-right: 10px;
+    position: absolute;
+    bottom: 10px;
+    left: 13px;
+}
+
 .link {
     display: block;
     float: right;

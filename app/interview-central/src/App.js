@@ -104,6 +104,7 @@ export class App extends Component {
                 name={question.name}
                 description={question.description}
                 type="BIG"
+                tileLink={question.link}
                 key={index}
                 createSuite={this.state.createSuite}
                 checkChangeFunc={this.handleCheckChangeFunc}
