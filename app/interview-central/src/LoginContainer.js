@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from './Login';
 import { loginUserAction } from './state/account/accountActions';
+import { getHomeDataAction } from './state/home/homeActions';
 import { getAccountInfo } from './state/account/accountSelectors';
 
 export class LoginCont extends Component {
@@ -17,6 +18,7 @@ export class LoginCont extends Component {
     render() {
         const account = this.props.account;
         if (account.done && account.success) {
+            this.props.getHomeData(account.username);
             this.props.history.push("/");
             return <div />;
         }
@@ -35,6 +37,7 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch) {
     return {
+        getHomeData: (username) => dispatch(getHomeDataAction(username)),        
         loginFunc: (username, password) => dispatch(loginUserAction(username, password)),
     };
 };

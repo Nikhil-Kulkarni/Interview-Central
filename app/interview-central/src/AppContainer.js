@@ -4,7 +4,6 @@ import App from './App';
 import { getQuestions, getSuccess } from './state/questions/questionsSelectors';
 import { getQuestionsAction } from './state/questions/questionsActions';
 import { getHomeData } from './state/home/homeSelectors';
-import { getHomeDataAction } from './state/home/homeActions';
 import { getAccountInfo } from './state/account/accountSelectors';
 import { callCreateSuiteAPI } from './state/suites/suitesActions';
 
@@ -28,9 +27,6 @@ export class AppCont extends Component {
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
-        if (this.props.account.success) {
-            this.props.getHomeData(this.props.account.username);
-        }
 
         if (this.props.success) {
             return (
@@ -58,7 +54,6 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
     return {
         getQuestions: dispatch(getQuestionsAction()),
-        getHomeData: (username) => dispatch(getHomeDataAction(username)),
     };
 };
 
