@@ -53,7 +53,8 @@ export default class Tile extends Component {
                 <div className='shareLink'>
                     <FacebookShareButton 
                         url={this.props.tileLink ? this.props.tileLink : `http://localhost:8080/suite/${this.props.linkId}`} 
-                        quote="Check out my suite on Interview-Central!">
+                        quote={this.props.tileLink ? "I like this question from Interview-Central" : "Check out my suite on Interview-Central!"} 
+                    >
                         <FacebookIcon size={32} round />
                     </FacebookShareButton>  
                 </div>

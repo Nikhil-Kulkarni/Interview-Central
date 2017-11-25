@@ -25,6 +25,7 @@ export default class Suite extends Component {
                             name={question.name}
                             description={question.description}
                             type="BIG"
+                            tileLink={question.link}
                             key={index}
                         />
                     )}

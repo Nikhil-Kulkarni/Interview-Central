@@ -32,14 +32,14 @@ export class AppCont extends Component {
             this.props.getHomeData(this.props.account.username);
         }
 
-        if (this.props.success && this.props.account.done) {
+        if (this.props.success) {
             return (
-                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account.success} saveSuite={this.handleSaveSuite}/>
+                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account ? this.props.account.success : false} saveSuite={this.handleSaveSuite}/>
             );
         } else {
             return (
                 <div>
-                    <App questions={[]} mySuite={[]} recommended={[]} loggedIn={false} saveSuite={this.handleSaveSuite}/>
+                    <App questions={[]} mySuite={[]} recommended={[]} loggedIn={this.props.account ? this.props.account.success : false} saveSuite={this.handleSaveSuite}/>
                 </div>
             );
         }

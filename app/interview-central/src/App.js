@@ -120,8 +120,7 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
-                    {/* TODO: MAKE THIS LOOK NICER */}
-                    {this.props.mySuite.length === 0 ? "Login to View Suites" : ""}
+                    {this.props.loggedIn ? "" : <div className="loginRequest">Login to View Suites</div>}
                     {this.props.mySuite.map((curSuite, index) =>
                       <Row center="xs" key={index}>
                         <Col xs={6}>
@@ -145,6 +144,7 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>RECOMMENDED</div>
+                    {this.props.loggedIn ? "" : <div className="loginRequest">Login to View Recommended</div>}                    
                     <Row center="xs">
                         <Col xs={6}>
                           <Tile
