@@ -50,7 +50,7 @@ export default class Login extends Component {
                 <div className="fbLogin">
                     <FacebookLogin
                         appId="1928978060689017"
-                        autoLoad={true}
+                        autoLoad={false}
                         fields="name,email,picture"
                         callback={this.responseFacebook} 
                     />
