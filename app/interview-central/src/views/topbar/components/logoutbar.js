@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import './logoutbar.css';
 import { logout } from '../../../state/account/accountActions';
 import { connect } from 'react-redux';
+import { getAccountInfo } from '../../../state/account/accountSelectors';
+import { addFriendAction } from '../../../state/account/accountActions';
 
 export class LogoutB extends Component {
     static propTypes = {
@@ -19,10 +21,23 @@ export class LogoutB extends Component {
         this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
+        this.handleAddFriend = this.handleAddFriend.bind(this);
 
         this.state = {
             showModal: false,
         };
+    }
+
+    handleAddFriend(event) {
+        event.preventDefault();
+        
+        let usernameB = event.target.username.value;
+        addFriendAction(this.props.account.username, usernameB)
+            .then(response => {
+                return response.json();
+            }).then(json => {
+                this.handleCloseModal();
+            });
     }
 
     handleOpenModal() {
@@ -72,15 +87,17 @@ export class LogoutB extends Component {
                     <ReactModal isOpen={this.state.showModal} contentLabel="Add Friend Modal" className="addFriendModal">
                         <div className="loginModalContainer">
                             <h4 className="friendHeader">FOLLOW NEW PEOPLE</h4>
-                            <div className="modalContent">
-                                <Textbox name="Friend's name" placeholder="Username" password={false} />
-                                <div className="modalDiv">
-                                    <button className="modalButton">ADD</button>
+                            <form onSubmit={this.handleAddFriend}>
+                                <div className="modalContent">
+                                    <Textbox name="username" placeholder="Username" password={false} />
+                                    <div className="modalDiv">
+                                        <button className="modalButton" type="submit">ADD</button>
+                                    </div>
+                                    <div className="modalDiv">
+                                        <button className="modalButton" onClick={this.handleCloseModal} type="button">CANCEL</button>
+                                    </div>
                                 </div>
-                                <div className="modalDiv">
-                                    <button className="modalButton" onClick={this.handleCloseModal}>CANCEL</button>
-                                </div>
-                            </div>
+                            </form>
                         </div>
                     </ReactModal>
                 </div>
@@ -104,6 +121,7 @@ export class LogoutB extends Component {
 
 const mapStateToProps = function(state) {
     return {
+        account: getAccountInfo(state),        
     };
 };
 

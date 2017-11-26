@@ -110,6 +110,21 @@ export function loginUserAPI(username, password) {
         .then( response => Promise.all([response, response.json()]));
 }
 
+export function addFriendAction(usernameA, usernameB) {
+    const URL = `http://localhost:5000/addFriend`;
+    return fetch(URL, 
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                usernameA: usernameA,
+                usernameB: usernameB
+            })
+        });
+}
+
 export function logout() {
     return {
         type: LOGOUT,
