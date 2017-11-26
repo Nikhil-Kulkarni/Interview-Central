@@ -102,6 +102,24 @@ def getSuite(suiteId):
     else:
         return jsonify({})
 
+@app.route("/addFriend", methods=['POST'])
+def addFriend():
+    dynamodb = boto3.resource('dynamodb')
+    friendsTable = dynamodb.Table('interview-friends')
+
+    jsonBody = json.loads(request.data)
+    usernameA = jsonBody["usernameA"]
+    usernameB = jsonBody["usernameB"]
+
+    response = friendsTable.put_item(
+        Item={
+            'usernameA':str(usernameA),
+            'usernameB':str(usernameB)
+        }
+    )
+
+    return jsonify(response)
+
 @app.route("/register", methods=['POST'])
 def registerUser():
     dynamodb = boto3.resource('dynamodb')

@@ -71,9 +71,9 @@ export class LogoutB extends Component {
                     </div>
                     <ReactModal isOpen={this.state.showModal} contentLabel="Add Friend Modal" className="addFriendModal">
                         <div className="loginModalContainer">
-                            <h4 className="friendHeader">ADD FRIEND</h4>
+                            <h4 className="friendHeader">FOLLOW NEW PEOPLE</h4>
                             <div className="modalContent">
-                                <Textbox name="Friend's name" placeholder="Friend's username" password={false} />
+                                <Textbox name="Friend's name" placeholder="Username" password={false} />
                                 <div className="modalDiv">
                                     <button className="modalButton">ADD</button>
                                 </div>
