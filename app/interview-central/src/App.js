@@ -26,7 +26,7 @@ export class App extends Component {
       suiteListIds: [],
     };
 
-    this.onInputChange.bind(this);
+    this.onInputChange = this.onInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
     this.handleCheckChangeFunc = this.handleCheckChangeFunc.bind(this);
@@ -92,7 +92,7 @@ export class App extends Component {
       <div className="App">
         <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite}/>
         <div className='title'>INTERVIEW CENTRAL</div>
-        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange.bind(this)} onKeyPress={event => {
+        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
               if (event.key === "Enter") {
                 this.handleSearch();
               }

@@ -28,7 +28,9 @@ export default class Login extends Component {
 
     responseFacebook(response) {
         let userID = response.userID;
-        this.props.loginFBFunc(userID);
+        if (userID) {
+            this.props.loginFBFunc(userID);            
+        }
     }
 
     render() {
