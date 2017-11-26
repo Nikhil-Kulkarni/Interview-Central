@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import ReactModal from 'react-modal';
+import Textbox from '../../../views/textbox/textbox';
 import { Link } from 'react-router-dom';
 import './logoutbar.css';
 import { logout } from '../../../state/account/accountActions';
@@ -15,6 +17,24 @@ export class LogoutB extends Component {
     componentWillMount() {
         this.handleLogout = this.handleLogout.bind(this);
         this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
+        this.handleOpenModal = this.handleOpenModal.bind(this);
+        this.handleCloseModal = this.handleCloseModal.bind(this);
+
+        this.state = {
+            showModal: false,
+        };
+    }
+
+    handleOpenModal() {
+        this.setState({
+            showModal: true,
+        });
+    }
+
+    handleCloseModal() {
+        this.setState({
+            showModal: false,
+        });
     }
 
     handleLogout() {
@@ -46,6 +66,23 @@ export class LogoutB extends Component {
                     <div className="logoutText">
                         {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
                     </div>
+                    <div className="logoutText">
+                        <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
+                    </div>
+                    <ReactModal isOpen={this.state.showModal} contentLabel="Add Friend Modal" className="addFriendModal">
+                        <div className="loginModalContainer">
+                            <h4 className="friendHeader">ADD FRIEND</h4>
+                            <div className="modalContent">
+                                <Textbox name="Friend's name" placeholder="Friend's username" password={false} />
+                                <div className="modalDiv">
+                                    <button className="modalButton">ADD</button>
+                                </div>
+                                <div className="modalDiv">
+                                    <button className="modalButton" onClick={this.handleCloseModal}>CANCEL</button>
+                                </div>
+                            </div>
+                        </div>
+                    </ReactModal>
                 </div>
             );
         }

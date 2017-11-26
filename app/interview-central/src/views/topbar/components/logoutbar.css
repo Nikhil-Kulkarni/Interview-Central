@@ -36,3 +36,43 @@
     padding: 10px;
     cursor: pointer;
 }
+
+.addFriendModal {
+    position: absolute;
+    top:0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 700px;
+    height: 300px;
+    border-radius: 10px;
+    background-color: #10354B;
+}
+
+.loginModalContainer {
+    text-align: center;
+}
+
+.modalContent {
+    margin-top: 20px;
+}
+
+.modalDiv {
+    margin-top: 10px;
+}
+
+.modalButton {
+    background: white;
+    border: 0px;
+    height: 35px;
+    width: 362px;
+    color: #10354B;
+    cursor: pointer;
+}
+
+.friendHeader {
+    color: white;
+    font-family: Orbitron, sans-serif;  
+    font-size: 24px;    
+}
