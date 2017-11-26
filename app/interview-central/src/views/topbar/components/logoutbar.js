@@ -52,6 +52,11 @@ export class LogoutB extends Component {
 
         return (
             <div className='logoutContainer'>
+                <div className="homeLink">
+                    <div className='homeLinkText'>
+                        <Link className='homeLinkText' to="/">IC</Link>                            
+                    </div>
+                </div>
                 <div className="logoutText">
                     <Link className='logLink' to="/login">Login</Link>
                 </div>
