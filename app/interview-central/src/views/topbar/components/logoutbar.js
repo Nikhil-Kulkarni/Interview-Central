@@ -35,6 +35,11 @@ export class LogoutB extends Component {
         if (this.props.loggedIn) {
             return (
                 <div className='logoutContainer'>
+                    <div className="homeLink">
+                        <div className='homeLinkText'>
+                            <Link className='homeLinkText' to="/">IC</Link>                            
+                        </div>
+                    </div>
                     <div className="logoutText">
                         <div className='logLink' onClick={this.handleLogout}>Logout</div>
                     </div>
