@@ -25,12 +25,13 @@ export class T extends Component {
         linkId: PropTypes.string,
         createSuite: PropTypes.bool,
         checkChangeFunc: PropTypes.func,
+        suiteIds: PropTypes.array,
         question: PropTypes.object.isRequired,
     }
 
     componentWillMount() {
         this.state = {
-            checked: false,
+            checked: this.props.isChecked,
             alreadyRecommended: false,
         };
 
@@ -61,10 +62,22 @@ export class T extends Component {
             name,
             description,
         } = this.props;
+        const suiteIds = this.props.suiteIds;
+        console.log("[TILE] suiteIds: " + suiteIds);
+
+        var isChecked = false;
+
+        if (typeof suiteIds !== 'undefined' && suiteIds.indexOf(this.props.name) !== -1) {
+            isChecked = true;
+        } else {
+            isChecked = false;
+        }
+        console.log("isChecked: " + isChecked);
+
         return (
             <div className={this.props.type === "BIG" ? 'big' : 'small'}>
                 <h5 className='boxText'>{name}</h5>
-                {this.props.createSuite ? <input className='suiteCheck' type='checkbox' checked={this.state.checked} onChange={this.onCheckChange}/> : null}
+                {this.props.createSuite ? <input className='suiteCheck' type='checkbox' checked={isChecked} onChange={this.onCheckChange}/> : null}
                 <h6 className='boxText'>{description}</h6>
                 <div className='shareLink'>
                     <FacebookShareButton
@@ -74,11 +87,11 @@ export class T extends Component {
                         <FacebookIcon size={32} round />
                     </FacebookShareButton>
                 </div>
-                {this.state.alreadyRecommended || !this.props.tileLink ? <div  /> : 
+                {this.state.alreadyRecommended || !this.props.tileLink ? <div  /> :
                     <div className="recommendLink" onClick={this.onRecommendClick}>Recommend</div>}
                 <div className='link'>
                     {this.props.linkId ? <Link className='hyperlink' to={this.props.linkId}>More Info</Link> : <div />}
-                </div>             
+                </div>
             </div>
         );
     }
@@ -87,7 +100,7 @@ export class T extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        account: getAccountInfo(state),        
+        account: getAccountInfo(state),
     };
 };
 

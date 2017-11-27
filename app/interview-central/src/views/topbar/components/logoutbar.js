@@ -30,7 +30,7 @@ export class LogoutB extends Component {
 
     handleAddFriend(event) {
         event.preventDefault();
-        
+
         let usernameB = event.target.username.value;
         addFriendAction(this.props.account.username, usernameB)
             .then(response => {
@@ -66,20 +66,24 @@ export class LogoutB extends Component {
         }
     }
 
+    handleSaveSuite() {
+        this.props.toggleCreateSuite(false);
+    }
+
     render() {
         if (this.props.loggedIn) {
             return (
                 <div className='logoutContainer'>
                     <div className="homeLink">
                         <div className='homeLinkText'>
-                            <Link className='homeLinkText' to="/">IC</Link>                            
+                            <Link className='homeLinkText' to="/">IC</Link>
                         </div>
                     </div>
                     <div className="logoutText">
                         <div className='logLink' onClick={this.handleLogout}>Logout</div>
                     </div>
                     <div className="logoutText">
-                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleSaveSuite}>Save Suite</div>}
                     </div>
                     <div className="logoutText">
                         <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
@@ -108,7 +112,7 @@ export class LogoutB extends Component {
             <div className='logoutContainer'>
                 <div className="homeLink">
                     <div className='homeLinkText'>
-                        <Link className='homeLinkText' to="/">IC</Link>                            
+                        <Link className='homeLinkText' to="/">IC</Link>
                     </div>
                 </div>
                 <div className="logoutText">
@@ -121,7 +125,7 @@ export class LogoutB extends Component {
 
 const mapStateToProps = function(state) {
     return {
-        account: getAccountInfo(state),        
+        account: getAccountInfo(state),
     };
 };
 

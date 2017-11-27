@@ -84,11 +84,13 @@ export class App extends Component {
       } else {
           this.state.suiteListIds.splice(idIndex, 1);
       }
-    //   console.log("Group List: " + this.state.suiteListIds);
+      console.log("Group List: " + this.state.suiteListIds);
+      console.log("[APP] suiteIds: ");
+      console.log(this.state.suiteListIds);
   }
 
   render() {
-    let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);    
+    let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
 
     return (
@@ -113,6 +115,7 @@ export class App extends Component {
                 key={index}
                 createSuite={this.state.createSuite}
                 checkChangeFunc={this.handleCheckChangeFunc}
+                suiteIds={this.state.suiteListIds}
                 question={question}
               />
             )}
@@ -126,7 +129,7 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
-                    {this.props.loggedIn ? 
+                    {this.props.loggedIn ?
                       this.props.mySuite.map((curSuite, index) =>
                         <Row center="xs" key={index}>
                           <Col xs={6}>
@@ -143,7 +146,7 @@ export class App extends Component {
                           </Col>
                         </Row>
                       )
-                    : 
+                    :
                     <div className="loginRequest">Login to View Suites</div>}
                   </Col>
                 </Row>
@@ -154,7 +157,7 @@ export class App extends Component {
                   <Col xs={12}>
                     <div className='header'>RECOMMENDED</div>
                     {this.props.loggedIn ?
-                      this.props.recommended.map((recommendation, index) =>                      
+                      this.props.recommended.map((recommendation, index) =>
                         <Row center="xs" key={index}>
                           <Col xs={6}>
                             <Tile
@@ -169,8 +172,8 @@ export class App extends Component {
                           </Col>
                         </Row>
                       )
-                    : 
-                    <div className="loginRequest">Login to View Recommended</div>}                    
+                    :
+                    <div className="loginRequest">Login to View Recommended</div>}
                   </Col>
                 </Row>
               </Col>
