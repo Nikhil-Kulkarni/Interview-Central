@@ -66,9 +66,9 @@ export class LogoutB extends Component {
         }
     }
 
-    handleSaveSuite() {
-        this.props.toggleCreateSuite(false);
-    }
+    // handleSaveSuite() {
+    //     this.props.toggleCreateSuite(false)
+    // }
 
     render() {
         if (this.props.loggedIn) {
@@ -83,7 +83,7 @@ export class LogoutB extends Component {
                         <div className='logLink' onClick={this.handleLogout}>Logout</div>
                     </div>
                     <div className="logoutText">
-                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleSaveSuite}>Save Suite</div>}
+                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
                     </div>
                     <div className="logoutText">
                         <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
