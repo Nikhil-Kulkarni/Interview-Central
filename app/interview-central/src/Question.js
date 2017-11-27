@@ -44,12 +44,17 @@ export default class Question extends Component {
                         <a href={question.link} className="questionBoxLink">{question.link}</a>
                     </div>
                     <div className='shareLink'>
-                    <FacebookShareButton
-                        url={question.link}
-                        quote="I attempted this question from Interview-Central" 
-                    >
-                        <FacebookIcon size={32} round />
-                    </FacebookShareButton>  
+                    {question.link ? 
+                        <FacebookShareButton
+                            url={question.link}
+                            quote="I attempted this question from Interview-Central" 
+                        >
+                            <FacebookIcon size={32} round />
+                        </FacebookShareButton>      
+                    :
+                        <div />
+                    }
+
                 </div>
                 </div>
             </div>

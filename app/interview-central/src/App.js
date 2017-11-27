@@ -88,6 +88,9 @@ export class App extends Component {
   }
 
   render() {
+    let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);    
+    let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
+
     return (
       <div className="App">
         <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite}/>
@@ -148,16 +151,21 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>RECOMMENDED</div>
-                    {this.props.loggedIn ? 
-                      <Row center="xs">
-                        <Col xs={6}>
-                          <Tile
-                            name="Recommended"
-                            description="This is an example of a recommended question"
-                            type="SMALL"
-                            />
-                        </Col>
-                      </Row>
+                    {this.props.loggedIn ?
+                      this.props.recommended.map((recommendation, index) =>                      
+                        <Row center="xs" key={index}>
+                          <Col xs={6}>
+                            <Tile
+                              name={recommendedQuestions[index].name + ` - by ${recommendation.username}`}
+                              description={recommendedQuestions[index].description}
+                              type="SMALL"
+                              key={index}
+                              tileLink={recommendedQuestions[index].link}
+                              linkId={`/question/${recommendedQuestions[index].id}`}
+                              />
+                          </Col>
+                        </Row>
+                      )
                     : 
                     <div className="loginRequest">Login to View Recommended</div>}                    
                   </Col>

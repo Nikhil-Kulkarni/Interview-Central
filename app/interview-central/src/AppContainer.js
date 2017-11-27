@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import _ from 'lodash';
 import App from './App';
 import { getQuestions, getSuccess } from './state/questions/questionsSelectors';
 import { getQuestionsAction } from './state/questions/questionsActions';
@@ -27,10 +28,11 @@ export class AppCont extends Component {
     render() {
         const items = this.props.questions.questions;
         const mySuite = this.props.homeData.mySuite;
+        const recommended = this.props.homeData.recommended;
 
         if (this.props.success) {
             return (
-                <App questions={items.questions.Items} mySuite={mySuite} recommended={[]} loggedIn={this.props.account ? this.props.account.success : false} saveSuite={this.handleSaveSuite}/>
+                <App questions={items.questions.Items} mySuite={mySuite} recommended={recommended ? recommended : []} loggedIn={this.props.account ? this.props.account.success : false} saveSuite={this.handleSaveSuite}/>
             );
         } else {
             return (
