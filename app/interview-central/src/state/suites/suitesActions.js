@@ -7,6 +7,7 @@ export function getSuite(id) {
 
 export function callCreateSuiteAPI(suiteName, person, questionIds) {
     const URL = "http://localhost:5000/createSuite";
+    console.log("SuiteName: " + suiteName);
     return fetch(URL,
         {
             method: 'POST',

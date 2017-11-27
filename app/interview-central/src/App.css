@@ -16,7 +16,12 @@
 
 .loginRequest {
   margin-top: 20px;
-  font-family: Orbitron, sans-serif;  
+  font-family: Orbitron, sans-serif;
+}
+
+.suiteNameBox {
+    display: block;
+    float: left;
 }
 
 .search {

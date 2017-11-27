@@ -14,8 +14,8 @@ export class AppCont extends Component {
         this.handleSaveSuite = this.handleSaveSuite.bind(this);
     }
 
-    handleSaveSuite(suiteListIds) {
-        callCreateSuiteAPI("testSuiteName", this.props.account.username, suiteListIds)
+    handleSaveSuite(suiteListIds, suiteName) {
+        callCreateSuiteAPI(suiteName, this.props.account.username, suiteListIds)
             .then(response => {
                 console.log("Response");
                 return response.json();

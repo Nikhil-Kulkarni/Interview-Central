@@ -4,6 +4,7 @@ import Tile from './views/tile/tile';
 import LogoutBar from './views/topbar/components/logoutbar';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
+import Textbox from './views/textbox/textbox';
 import _ from 'lodash';
 
 export class App extends Component {
@@ -24,12 +25,14 @@ export class App extends Component {
       showSearch: false,
       createSuite: false,
       suiteListIds: [],
+      newSuiteName: "",
     };
 
     this.onInputChange = this.onInputChange.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
     this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
     this.handleCheckChangeFunc = this.handleCheckChangeFunc.bind(this);
+    this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
   }
 
   onInputChange(event) {
@@ -66,10 +69,14 @@ export class App extends Component {
       // If curState is false, save the suite
       if (!curState) {
           var tempSuiteIds = this.state.suiteListIds;
+          var tempSuiteName = this.state.newSuiteName;
           this.setState({
               suiteListIds: [],
+              newSuiteName: "",
           });
-          this.props.saveSuite(tempSuiteIds);
+
+          console.log("[APP] tempSuiteIds: " + tempSuiteIds);
+          this.props.saveSuite(tempSuiteIds, tempSuiteName);
       }
       this.setState({
           createSuite: curState,
@@ -89,6 +96,12 @@ export class App extends Component {
       console.log(this.state.suiteListIds);
   }
 
+  handleTextBoxChange(value) {
+      this.setState({
+          newSuiteName: value,
+      });
+  }
+
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
@@ -105,20 +118,25 @@ export class App extends Component {
         <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
         {this.state.showSearch || this.state.createSuite ?
             <div>
-            {this.state.currentlyDisplayed.map((question, index) =>
-              <Tile
-                name={question.name}
-                description={question.description}
-                type="BIG"
-                tileLink={question.link}
-                linkId={`/question/${question.id}`}
-                key={index}
-                createSuite={this.state.createSuite}
-                checkChangeFunc={this.handleCheckChangeFunc}
-                suiteIds={this.state.suiteListIds}
-                question={question}
-              />
-            )}
+                {this.state.createSuite ?
+                    <div>
+                        <div className='header'> Suite Name</div>
+                        <Textbox className="suiteNameBox" name="suiteName" placeholder="Enter Suite Name" password={false} handleChange={this.handleTextBoxChange}/>
+                    </div> : null}
+                {this.state.currentlyDisplayed.map((question, index) =>
+                  <Tile
+                    name={question.name}
+                    description={question.description}
+                    type="BIG"
+                    tileLink={question.link}
+                    linkId={`/question/${question.id}`}
+                    key={index}
+                    createSuite={this.state.createSuite}
+                    checkChangeFunc={this.handleCheckChangeFunc}
+                    suiteIds={this.state.suiteListIds}
+                    question={question}
+                  />
+                )}
             </div>
 
             :

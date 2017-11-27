@@ -7,6 +7,23 @@ export default class Textbox extends Component {
         name: PropTypes.string.isRequired,
         placeholder: PropTypes.string,
         password: PropTypes.bool.isRequired,
+        handleChange: PropTypes.func,
+    }
+
+    componentWillMount() {
+        this.state = {
+            value: "",
+        }
+        this.handleChange = this.handleChange.bind(this);
+    }
+
+    handleChange(event) {
+        this.setState({
+            value: event.target.value,
+        });
+        if (typeof this.props.handleChange !== 'undefined') {
+            this.props.handleChange(this.state.value);
+        }
     }
 
     render() {
@@ -34,6 +51,7 @@ export default class Textbox extends Component {
                     className="textbox"
                     name={name}
                     placeholder={placeholder}
+                    onChange={this.handleChange}
                  />
             </div>
         );
