@@ -75,3 +75,18 @@ export function getSharedDataAPI(username) {
     return fetch(URL, { method: 'GET'})
         .then( response => Promise.all([response, response.json()]));
 }
+
+export function recommendToFollowers(username, questionId) {
+    const URL = `http://localhost:5000/recommendQuestionToFollowers`;
+    return fetch(URL,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                questionId: questionId,
+            })
+        });
+}

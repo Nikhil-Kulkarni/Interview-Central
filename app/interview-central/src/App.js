@@ -113,6 +113,7 @@ export class App extends Component {
                 key={index}
                 createSuite={this.state.createSuite}
                 checkChangeFunc={this.handleCheckChangeFunc}
+                question={question}
               />
             )}
             </div>
@@ -137,6 +138,7 @@ export class App extends Component {
                               linkId={`/suite/${curSuite.suiteId}`}
                               createSuite={this.state.createSuite}
                               checkChangeFunc={this.handleCheckChangeFunc}
+                              question={{}}
                             />
                           </Col>
                         </Row>
@@ -162,6 +164,7 @@ export class App extends Component {
                               key={index}
                               tileLink={recommendedQuestions[index].link}
                               linkId={`/question/${recommendedQuestions[index].id}`}
+                              question={recommendedQuestions[index]}
                               />
                           </Col>
                         </Row>

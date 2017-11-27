@@ -28,6 +28,7 @@ export default class Suite extends Component {
                             linkId={`/question/${question.id}`}
                             tileLink={question.link}
                             key={index}
+                            question={question}
                         />
                     )}
                 </div>

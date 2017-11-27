@@ -47,6 +47,18 @@
     left: 13px;
 }
 
+.recommendLink {
+    float: left;
+    margin-left: 40px;
+    margin-bottom: 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 13px;
+    color: #56CCF2;
+    cursor: pointer;
+    font-size: 12px;
+}
+
 .link {
     display: block;
     float: right;
