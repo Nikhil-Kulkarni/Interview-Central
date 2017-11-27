@@ -57,6 +57,45 @@ def getQuestionWithId(questionId):
     else:
         return jsonify({})
 
+@app.route("/recommendQuestionToFollowers", methods=['POST'])
+def shareQuestion():
+    dynamodb = boto3.resource('dynamodb')
+    interviewShared = dynamodb.Table('interview-shared')
+
+    jsonBody = json.loads(request.data)
+    questionId = jsonBody["questionId"]
+    username = jsonBody["username"]
+    sId = uuid.uuid4().hex
+
+    response = interviewShared.put_item(
+        Item={
+            'id':str(sId),
+            'username':str(username),
+            'questionId':questionId
+        }
+    )
+
+    return jsonify(response)
+
+@app.route("/getRecommendedFromFollowing/<username>", methods=['GET'])
+def getRecommendedFromFollowing(username):
+    dynamodb = boto3.resource('dynamodb')
+    interviewShared = dynamodb.Table('interview-shared')
+
+    friendsDict = getFriends(username)
+
+    questions = []
+    for f in friendsDict:
+        friend = f["usernameB"]
+        filtering_exp = Key("username").eq(friend)
+        response = interviewShared.scan(FilterExpression=filtering_exp)
+
+        for item in response["Items"]:
+            questions.append(item)
+
+    return jsonify(questions)
+
+
 @app.route("/getHomeData/<username>")
 def getHomeData(username):
     dynamodb = boto3.resource('dynamodb')
@@ -119,6 +158,16 @@ def addFriend():
     )
 
     return jsonify(response)
+
+@app.route("/getFriends/<username>", methods=['GET'])
+def getFriends(username):
+    dynamodb = boto3.resource('dynamodb')
+    friendsTable = dynamodb.Table('interview-friends')
+
+    filtering_exp = Key("usernameA").eq(username)
+    response = friendsTable.scan(FilterExpression=filtering_exp)
+
+    return response["Items"]
 
 @app.route("/register", methods=['POST'])
 def registerUser():
