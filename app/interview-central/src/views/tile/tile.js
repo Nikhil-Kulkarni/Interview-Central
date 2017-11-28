@@ -70,8 +70,6 @@ export class T extends Component {
         } else {
             isChecked = false;
         }
-        console.log("isChecked: " + isChecked);
-
         return (
             <div className={this.props.type === "BIG" ? 'big' : 'small'}>
                 <h5 className='boxText'>{name}</h5>

@@ -66,8 +66,7 @@ export class App extends Component {
       }
   }
 
-  handleToggleCreateSuite(curState) {
-      // If curState is false, save the suite
+  handleToggleCreateSuite(curState, cancel) {
       if (!curState) {
           var tempSuiteIds = this.state.suiteListIds;
           var tempSuiteName = this.state.newSuiteName;
@@ -75,8 +74,12 @@ export class App extends Component {
               suiteListIds: [],
               newSuiteName: "",
           });
-          this.props.saveSuite(tempSuiteIds, tempSuiteName);
+          if (!cancel) {
+              this.props.saveSuite(tempSuiteIds, tempSuiteName);
+          }
       }
+      // If curState is false, save the suite
+
       this.setState({
           createSuite: curState,
       });
@@ -134,6 +137,7 @@ export class App extends Component {
                 {this.state.createSuite ?
                     <div>
                         <div className='header'> Suite Name</div>
+                        <br />
                         <Textbox className="suiteNameBox" name="suiteName" placeholder="Enter Suite Name" password={false} handleChange={this.handleTextBoxChange}/>
                     </div> : null}
                 {this.state.currentlyDisplayed.map((question, index) =>
