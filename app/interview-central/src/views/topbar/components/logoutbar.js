@@ -139,6 +139,9 @@ export class LogoutB extends Component {
                 <div className="logoutText">
                     <Link className='logLink' to="/login">Login</Link>
                 </div>
+                <div className="logoutText">
+                    <div className="logLink" onClick={this.props.handleAllQuestions}>All Questions</div>
+                </div>
             </div>
         );
     }
