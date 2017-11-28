@@ -259,6 +259,21 @@ def loginUser():
         else:
             return jsonify({"success": False, "error": "Incorrect password"})
 
+@app.route("/getRecommendedCategory/<username>", methods=['GET'])
+def getRecommendedCategory(username):
+    dynamodb = boto3.resource('dynamodb')
+    categoriesTables = dynamodb.Table('interview-categories')
+
+    filtering_exp = Key("username").eq(username)
+    response = categoriesTables.scan(FilterExpression=filtering_exp)
+
+    items = response["Items"][0]
+    category = min(items, key=items.get)
+    itemsDict = {
+        "category":category
+    }
+    return jsonify(itemsDict)
+
 @app.route("/viewedQuestionCategory", methods=['POST'])
 def viewedQuestionCategory():
     dynamodb = boto3.resource('dynamodb')
