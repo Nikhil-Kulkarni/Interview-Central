@@ -7,6 +7,7 @@ from flask import jsonify
 from flask_cors import CORS
 from flask import request
 from boto3.dynamodb.conditions import Key, Attr
+from botocore.exceptions import ClientError
 app = Flask(__name__)
 CORS(app)
 
@@ -127,6 +128,30 @@ def createSuite():
     )
 
     return jsonify(response)
+
+@app.route("/deleteSuite", methods=['POST'])
+def deleteSuite():
+    dynamodb = boto3.resource('dynamodb')
+    suitesTable = dynamodb.Table('interview-suites')
+
+    jsonBody = json.loads(request.data)
+    name = jsonBody["name"]
+    person = jsonBody["username"]
+
+    try:
+        response = suitesTable.delete_item(
+            Key={
+                'suiteName':name,
+                'person':person
+            }
+        )
+    except ClientError as e:
+        if e.response['Error']['Code'] == "ConditionalCheckFailedException":
+            print(e.response['Error']['Message'])
+        else:
+            raise
+    else:
+        return jsonify(response)
 
 @app.route("/getSuite/<suiteId>", methods=['GET'])
 def getSuite(suiteId):
