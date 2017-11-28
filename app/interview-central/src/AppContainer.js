@@ -8,6 +8,7 @@ import { getHomeData } from './state/home/homeSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
 import { callCreateSuiteAPI } from './state/suites/suitesActions';
 import { getHomeDataAction } from './state/home/homeActions';
+import { getRecommendedCategory } from './state/recommended/recommendedSelectors';
 
 export class AppCont extends Component {
 
@@ -37,14 +38,19 @@ export class AppCont extends Component {
         const mySuite = this.props.homeData.mySuite;
         const recommended = this.props.homeData.recommended;
 
+
         if (this.props.success) {
+            let recommendedQuestions = _.filter(items.questions.Items, question => question.category === this.props.getRecommendedCategory);
+            let randomQuestion = recommendedQuestions[Math.floor((Math.random() * recommendedQuestions.length))];            
+        
             return (
                 <App
                     questions={items.questions.Items}
                     mySuite={mySuite}
                     recommended={recommended ? recommended : []}
                     loggedIn={this.props.account ? this.props.account.success : false}
-                    saveSuite={this.handleSaveSuite}/>
+                    saveSuite={this.handleSaveSuite}
+                    recommendedQuestion={randomQuestion}/>
             );
         } else {
             return (
@@ -67,6 +73,7 @@ const mapStateToProps = function(state) {
         success: getSuccess(state),
         homeData: getHomeData(state),
         account: getAccountInfo(state),
+        getRecommendedCategory: getRecommendedCategory(state),
     };
 };
 

@@ -15,6 +15,7 @@ export class App extends Component {
     recommended: PropTypes.array.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     saveSuite: PropTypes.func,
+    recommendedQuestion: PropTypes.object,
   };
 
   componentWillMount() {
@@ -223,6 +224,23 @@ export class App extends Component {
                     )
                     :
                     <div className="loginRequest">Login to View Recommended</div>}
+                    {this.props.recommendedQuestion ? 
+                                          <Row center="xs">
+                                          <Col xs={6}>
+                                            <Tile
+                                              name={this.props.recommendedQuestion.name + ` - by IC`}
+                                              description={this.props.recommendedQuestion.description}
+                                              type="SMALL"
+                                              key={this.props.recommendedQuestion.id}
+                                              tileLink={this.props.recommendedQuestion.link}
+                                              linkId={`/question/${this.props.recommendedQuestion.id}`}
+                                              question={this.props.recommendedQuestion}
+                                              />
+                                          </Col>
+                                        </Row>
+                                        :
+                                        <div />
+                    }
                   </Col>
                 </Row>
               </Col>
