@@ -4,6 +4,7 @@ import Login from './Login';
 import { loginUserAction, loginWithFb } from './state/account/accountActions';
 import { getHomeDataAction, getSharedDataAction } from './state/home/homeActions';
 import { getAccountInfo } from './state/account/accountSelectors';
+import { getRecommendedAction } from './state/recommended/recommendedActions';
 
 export class LoginCont extends Component {
 
@@ -25,6 +26,7 @@ export class LoginCont extends Component {
         if (account.done && account.success) {
             this.props.getHomeData(account.username);
             this.props.getSharedData(account.username);
+            this.props.getRecommended(account.username);
             this.props.history.push("/");
             return <div />;
         }
@@ -47,6 +49,7 @@ const mapDispatchToProps = function(dispatch) {
         getSharedData: (username) => dispatch(getSharedDataAction(username)),
         loginFunc: (username, password) => dispatch(loginUserAction(username, password)),
         loginWithFb: (userID) => dispatch(loginWithFb(userID)),
+        getRecommended: (username) => dispatch(getRecommendedAction(username)),
     };
 };
 

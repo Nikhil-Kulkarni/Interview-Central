@@ -16,6 +16,7 @@ export class App extends Component {
     recommended: PropTypes.array.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     saveSuite: PropTypes.func,
+    recommendedQuestion: PropTypes.object,
   };
 
   componentWillMount() {
@@ -130,9 +131,11 @@ export class App extends Component {
 
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
-
+    console.log("IDS");
+    console.log(recommendedIds);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
-    // console.log(recommendedQuestions);
+    console.log("RECOMMENDE");
+    console.log(recommendedQuestions);
 
     return (
       <div className="App">
@@ -213,34 +216,51 @@ export class App extends Component {
                       </Col>
                     </Row>
                   </Col>
+                </Row>
+              </Col>
 
-                  <Col xs={6}>
-                    <Row>
-                      <Col xs={12}>
-                        <div className='header'>RECOMMENDED</div>
-                        {this.props.loggedIn ? (this.props.recommended.length !== 0 ?
-                          this.props.recommended.map((recommendation, index) =>
-                            <Row center="xs" key={index}>
-                              <Col xs={6}>
-                                <Tile
-                                  name={recommendedQuestions[index].name + ` - by ${recommendation.username}`}
-                                  description={recommendedQuestions[index].description}
-                                  type="SMALL"
-                                  key={index}
-                                  tileLink={recommendedQuestions[index].link}
-                                  linkId={`/question/${recommendedQuestions[index].id}`}
-                                  question={recommendedQuestions[index]}
-                                  />
-                              </Col>
-                            </Row>
-                        )
-                        :
-                        <div className="loginRequest">No Recommended Questions</div>
-                        )
-                        :
-                        <div className="loginRequest">Login to View Recommended</div>}
-                      </Col>
-                    </Row>
+              <Col xs={6}>
+                <Row>
+                  <Col xs={12}>
+                    <div className='header'>RECOMMENDED</div>
+                    {this.props.loggedIn ? (this.props.recommended.length !== 0 ?
+                      this.props.recommended.map((recommendation, index) =>
+                        <Row center="xs" key={index}>
+                          <Col xs={6}>
+                            <Tile
+                              name={recommendedQuestions[index].name + ` - by ${recommendation.username}`}
+                              description={recommendedQuestions[index].description}
+                              type="SMALL"
+                              key={index}
+                              tileLink={recommendedQuestions[index].link}
+                              linkId={`/question/${recommendedQuestions[index].id}`}
+                              question={recommendedQuestions[index]}
+                              />
+                          </Col>
+                        </Row>
+                    )
+                    :
+                    <div className="loginRequest">No Recommended Questions</div>
+                    )
+                    :
+                    <div className="loginRequest">Login to View Recommended</div>}
+                    {this.props.loggedIn && this.props.recommendedQuestion ?
+                                          <Row center="xs">
+                                          <Col xs={6}>
+                                            <Tile
+                                              name={this.props.recommendedQuestion.name + ` - by IC`}
+                                              description={this.props.recommendedQuestion.description}
+                                              type="SMALL"
+                                              key={this.props.recommendedQuestion.id}
+                                              tileLink={this.props.recommendedQuestion.link}
+                                              linkId={`/question/${this.props.recommendedQuestion.id}`}
+                                              question={this.props.recommendedQuestion}
+                                              />
+                                          </Col>
+                                        </Row>
+                                        :
+                                        <div />
+                    }
                   </Col>
 
                 </Row>
