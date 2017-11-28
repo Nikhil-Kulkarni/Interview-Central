@@ -8,6 +8,7 @@ from flask_cors import CORS
 from flask import request
 from boto3.dynamodb.conditions import Key, Attr
 from botocore.exceptions import ClientError
+import decimal
 app = Flask(__name__)
 CORS(app)
 
@@ -201,6 +202,9 @@ def registerUser():
     dynamodb = boto3.resource('dynamodb')
     usersTable = dynamodb.Table('interview-users')
 
+    dynamodb = boto3.resource('dynamodb')
+    categoriesTables = dynamodb.Table('interview-categories')
+
     jsonBody = json.loads(request.data)
     username = jsonBody["username"]
     password = jsonBody["password"]
@@ -209,6 +213,26 @@ def registerUser():
         Item={
             'username':str(username),
             'password':str(password)
+        }
+    )
+
+    res = categoriesTables.put_item(
+        Item={
+            'username':username,
+            'CombinationsandPermutations':0,
+            'HashMap': 0,
+            'Tree': 0,
+            'BitManipulation': 0,
+            'Math': 0,
+            'LinkedList': 0,
+            'Matrix':0,
+            'String/Array':0,
+            'Heap':0,
+            'Sorting':0,
+            'Trie':0,
+            'DynamicProgramming':0,
+            'Graph':0,
+            'SegmentTree':0
         }
     )
 
@@ -242,20 +266,78 @@ def viewedQuestionCategory():
 
     jsonBody = json.loads(request.data)
     category = jsonBody["category"]
-    username = jsonbody["username"]
+    username = jsonBody["username"]
 
-    response = categoriesTables.update_item(
-        Key={
-            'username': username
-        },
-        UpdateExpression="set info." + category + " = info." + category + " + :val",
-        ExpressionAttributeValues={
-            ':val': decimal.Decimal(1)
-        },
-        ReturnValues="UPDATED_NEW"
-    )
+    filtering_exp = Key("username").eq(username)
+    response = categoriesTables.scan(FilterExpression=filtering_exp)
 
-    return jsonify(response)
+    if response["Count"] != 0:
+        items = response["Items"][0]
+        ncStrArr = items["String/Array"]
+        ncMatrix = items["Matrix"]
+        ncLL = items["LinkedList"]
+        ncMath = items["Math"]
+        ncBit = items["BitManipulation"]
+        ncTree = items["Tree"]
+        ncHashMap = items["HashMap"]
+        ncComb = items["CombinationsandPermutations"]
+        ncHeap = items["Heap"]
+        ncSorting = items["Sorting"]
+        ncTrie = items["Trie"]
+        ncDP = items["DynamicProgramming"]
+        ncGraph = items["Graph"]
+        ncSegTree = items["SegmentTree"]
+
+        if category == "String/Array":
+            ncStrArr = ncStrArr + 1
+        elif category == "Matrix":
+            ncMatrix = ncMatrix + 1
+        elif category == "LinkedList":
+            ncLL = ncLL + 1
+        elif category == "Math":
+            ncMath = ncMath + 1
+        elif category == "BitManipulation":
+            ncBit = ncBit + 1
+        elif category == "Tree":
+            ncTree = ncTree + 1
+        elif category == "HashMap":
+            ncHashMap = ncHashMap + 1
+        elif category == "CombinationsandPermutations":
+            ncComb = ncComb + 1
+        elif category == "Heap":
+            ncHeap = ncHeap + 1
+        elif category == "Sorting":
+            ncSorting = ncSorting + 1
+        elif category == "Trie":
+            ncTrie = ncTrie + 1
+        elif category == "DynamicProgramming":
+            ncDP = ncDP + 1
+        elif category == "Graph":
+            ncGraph = ncGraph + 1
+        elif category == "SegmentTree":
+            ncSegTree = ncSegTree + 1
+
+        res = categoriesTables.put_item(
+            Item={
+                'username':username,
+                'CombinationsandPermutations':ncComb,
+                'HashMap': ncHashMap,
+                'Tree': ncTree,
+                'BitManipulation': ncBit,
+                'Math': ncMath,
+                'LinkedList': ncLL,
+                'Matrix':ncMatrix,
+                'String/Array':ncStrArr,
+                'Heap':ncHeap,
+                'Sorting':ncSorting,
+                'Trie':ncTrie,
+                'DynamicProgramming':ncDP,
+                'Graph':ncGraph,
+                'SegmentTree':ncSegTree
+            }
+        )
+
+    return jsonify(res)
 
 if __name__ == "__main__":
     update_database()
