@@ -161,6 +161,7 @@ export class App extends Component {
                               createSuite={this.state.createSuite}
                               checkChangeFunc={this.handleCheckChangeFunc}
                               question={{}}
+                              deleteSuite={true}
                             />
                           </Col>
                         </Row>

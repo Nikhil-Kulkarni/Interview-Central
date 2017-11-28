@@ -135,8 +135,8 @@ def deleteSuite():
     suitesTable = dynamodb.Table('interview-suites')
 
     jsonBody = json.loads(request.data)
-    name = jsonBody["name"]
-    person = jsonBody["username"]
+    name = jsonBody["suiteName"]
+    person = jsonBody["person"]
 
     try:
         response = suitesTable.delete_item(
