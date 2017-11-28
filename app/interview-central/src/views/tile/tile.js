@@ -6,7 +6,7 @@ import './tile.css';
 import { recommendToFollowers } from '../../state/home/homeActions';
 import { getAccountInfo } from '../../state/account/accountSelectors';
 import { deleteSuiteAPI } from '../../state/suites/suitesActions';
-import { getHomeDataAction } from '../../state/home/homeActions';
+import { getHomeDataAction, getSharedDataAction } from '../../state/home/homeActions';
 import {
     ShareButtons,
     generateShareIcon,
@@ -67,6 +67,7 @@ export class T extends Component {
             return response.json();
         }).then(json => {
             this.props.getHomeDataAction(this.props.account.username);
+            this.props.getSharedDataAction(this.props.account.username);
         });
     }
 
@@ -117,7 +118,8 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
-        getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),        
+        getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),    
+        getSharedDataAction: (username) => dispatch(getSharedDataAction(username)),
     };
 };
 
