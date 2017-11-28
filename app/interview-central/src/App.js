@@ -15,6 +15,7 @@ export class App extends Component {
     recommended: PropTypes.array.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     saveSuite: PropTypes.func,
+    username: PropTypes.string,
   };
 
   componentWillMount() {
@@ -127,7 +128,8 @@ export class App extends Component {
             createSuite={this.state.createSuite}
             toggleCreateSuite={this.handleToggleCreateSuite}
             setHomeState={this.handleSetHomeState}
-            handleAllQuestions={this.handleAllQuestions}/>
+            handleAllQuestions={this.handleAllQuestions}
+            username={this.props.username}/>
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
               if (event.key === "Enter") {

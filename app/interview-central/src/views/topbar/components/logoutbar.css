@@ -35,6 +35,16 @@
     text-decoration: none;
     padding: 10px;
     cursor: pointer;
+    vertical-align: middle;
+}
+
+.nameLink {
+    display: inline;
+    color: #10354B;
+    font-size: 14px;
+    text-decoration: none;
+    margin-Left: 10px;
+    vertical-align: middle;
 }
 
 .cancelSuite {
@@ -44,6 +54,7 @@
     text-decoration: none;
     padding: 10px;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .saveSuite {
@@ -53,6 +64,7 @@
     text-decoration: none;
     padding: 10px;
     cursor: pointer;
+    vertical-align: middle;
 }
 
 .addFriendModal {
