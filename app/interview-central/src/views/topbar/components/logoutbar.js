@@ -14,6 +14,7 @@ export class LogoutB extends Component {
         loggedIn: PropTypes.bool.isRequired,
         createSuite: PropTypes.bool.isRequired,
         toggleCreateSuite: PropTypes.func.isRequired,
+        setHomeState: PropTypes.func,
     }
 
     componentWillMount() {
@@ -22,6 +23,7 @@ export class LogoutB extends Component {
         this.handleOpenModal = this.handleOpenModal.bind(this);
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleAddFriend = this.handleAddFriend.bind(this);
+        this.handleSetHomeState = this.handleSetHomeState.bind(this);
 
         this.state = {
             showModal: false,
@@ -66,6 +68,12 @@ export class LogoutB extends Component {
         }
     }
 
+    handleSetHomeState() {
+        if (typeof this.props.setHomeState !== 'undefined') {
+            this.props.setHomeState();
+        }
+    }
+
     // handleSaveSuite() {
     //     this.props.toggleCreateSuite(false)
     // }
@@ -76,17 +84,17 @@ export class LogoutB extends Component {
                 <div className='logoutContainer'>
                     <div className="homeLink">
                         <div className='homeLinkText'>
-                            <Link className='homeLinkText' to="/">IC</Link>
+                            <Link className='homeLinkText' to="/" onClick={this.handleSetHomeState}>IC</Link>
                         </div>
                     </div>
                     <div className="logoutText">
                         <div className='logLink' onClick={this.handleLogout}>Logout</div>
                     </div>
                     <div className="logoutText">
-                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                        <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
                     </div>
                     <div className="logoutText">
-                        <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
+                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
                     </div>
                     <ReactModal isOpen={this.state.showModal} contentLabel="Add Friend Modal" className="addFriendModal">
                         <div className="loginModalContainer">

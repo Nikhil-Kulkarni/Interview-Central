@@ -33,6 +33,7 @@ export class App extends Component {
     this.handleToggleCreateSuite = this.handleToggleCreateSuite.bind(this);
     this.handleCheckChangeFunc = this.handleCheckChangeFunc.bind(this);
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
+    this.handleSetHomeState = this.handleSetHomeState.bind(this);
   }
 
   onInputChange(event) {
@@ -96,13 +97,19 @@ export class App extends Component {
       });
   }
 
+  handleSetHomeState() {
+      this.setState({
+          createSuite: false,
+      });
+  }
+
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
 
     return (
       <div className="App">
-        <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite}/>
+        <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite} setHomeState={this.handleSetHomeState}/>
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
               if (event.key === "Enter") {

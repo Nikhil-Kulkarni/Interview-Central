@@ -7,10 +7,12 @@ export function homeReducer(state = initialState, action) {
         case HOME_DATA_SUCCESS:
             let items = action.payload.Items;
             if (items.length === 0) {
-                return state;
+                return {
+                    mySuite: [],
+                };
             } else {
                 return Object.assign({}, state, {
-                    mySuite: action.payload.Items,                    
+                    mySuite: action.payload.Items,
                 });
             }
         case HOME_DATA_ERROR:
