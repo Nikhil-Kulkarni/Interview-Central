@@ -7,11 +7,13 @@ import { getQuestionsAction } from './state/questions/questionsActions';
 import { getHomeData } from './state/home/homeSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
 import { callCreateSuiteAPI } from './state/suites/suitesActions';
+import { getHomeDataAction } from './state/home/homeActions';
 
 export class AppCont extends Component {
 
     componentWillMount() {
         this.handleSaveSuite = this.handleSaveSuite.bind(this);
+        this.refreshPageInfo = this.refreshPageInfo.bind(this);
     }
 
     handleSaveSuite(suiteListIds, suiteName) {
@@ -22,7 +24,12 @@ export class AppCont extends Component {
             }).then(json => {
                 console.log("JSON");
                 console.log(json);
+                this.refreshPageInfo();
             });
+    }
+
+    refreshPageInfo() {
+        this.props.getHomeDataAction(this.props.account.username);
     }
 
     render() {
@@ -56,6 +63,7 @@ const mapStateToProps = function(state) {
 const mapDispatchToProps = function(dispatch) {
     return {
         getQuestions: dispatch(getQuestionsAction()),
+        getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),
     };
 };
 

@@ -74,8 +74,6 @@ export class App extends Component {
               suiteListIds: [],
               newSuiteName: "",
           });
-
-          console.log("[APP] tempSuiteIds: " + tempSuiteIds);
           this.props.saveSuite(tempSuiteIds, tempSuiteName);
       }
       this.setState({
@@ -85,15 +83,11 @@ export class App extends Component {
 
   handleCheckChangeFunc(id) {
       var idIndex = this.state.suiteListIds.indexOf(id)
-      console.log(id);
       if (idIndex === -1) {
           this.state.suiteListIds.push(id);
       } else {
           this.state.suiteListIds.splice(idIndex, 1);
       }
-      console.log("Group List: " + this.state.suiteListIds);
-      console.log("[APP] suiteIds: ");
-      console.log(this.state.suiteListIds);
   }
 
   handleTextBoxChange(value) {

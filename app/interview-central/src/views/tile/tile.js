@@ -63,8 +63,6 @@ export class T extends Component {
             description,
         } = this.props;
         const suiteIds = this.props.suiteIds;
-        console.log("[TILE] suiteIds: " + suiteIds);
-
         var isChecked = false;
 
         if (typeof suiteIds !== 'undefined' && suiteIds.indexOf(this.props.name) !== -1) {

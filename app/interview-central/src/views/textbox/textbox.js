@@ -21,8 +21,9 @@ export default class Textbox extends Component {
         this.setState({
             value: event.target.value,
         });
+        var type = typeof this.props.handleChange;
         if (typeof this.props.handleChange !== 'undefined') {
-            this.props.handleChange(this.state.value);
+            this.props.handleChange(event.target.value);
         }
     }
 

@@ -27,10 +27,12 @@ export function getHomeDataError() {
 }
 
 export function getHomeDataAction(username) {
+    console.log("GetHomeDataAction");
     return (dispatch) => {
         return getHomeDataAPI(username).then(([response, json]) => {
             if (response.status === 200) {
-                dispatch(getHomeDataSuccess(json));                
+                console.log(json);
+                dispatch(getHomeDataSuccess(json));
             } else {
                 dispatch(getHomeDataError());
             }
@@ -62,7 +64,7 @@ export function getSharedDataAction(username) {
     return (dispatch) => {
         return getSharedDataAPI(username).then(([response, json]) => {
             if (response.status === 200) {
-                dispatch(getSharedDataSuccess(json));                
+                dispatch(getSharedDataSuccess(json));
             } else {
                 dispatch(getSharedDataError());
             }
