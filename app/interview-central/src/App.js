@@ -224,7 +224,7 @@ export class App extends Component {
                     )
                     :
                     <div className="loginRequest">Login to View Recommended</div>}
-                    {this.props.recommendedQuestion ? 
+                    {this.props.loggedIn && this.props.recommendedQuestion ? 
                                           <Row center="xs">
                                           <Col xs={6}>
                                             <Tile
