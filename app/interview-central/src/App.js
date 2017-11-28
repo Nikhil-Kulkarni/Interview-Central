@@ -118,8 +118,10 @@ export class App extends Component {
 
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
-
+    console.log("IDS");
+    console.log(recommendedIds);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
+    console.log("RECOMMENDE");
     console.log(recommendedQuestions);
 
     return (

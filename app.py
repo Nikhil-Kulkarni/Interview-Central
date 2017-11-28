@@ -24,6 +24,7 @@ def update_database():
         description = question.description
         link = question.link
         source = question.source
+        category = question.category
 
         if (name != "" and description != ""):
             response = interviewQuestionsTable.put_item(
@@ -32,7 +33,8 @@ def update_database():
                     'description':description,
                     'link':str(link),
                     'source':str(source),
-                    'id':str(uuid.uuid4().hex)
+                    'id':str(uuid.uuid4().hex),
+                    'category':str(category)
                 }
             )
 
