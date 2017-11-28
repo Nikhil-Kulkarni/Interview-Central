@@ -7,7 +7,6 @@ export function getSuite(id) {
 
 export function callCreateSuiteAPI(suiteName, person, questionIds) {
     const URL = "http://localhost:5000/createSuite";
-    console.log("SuiteName: " + suiteName);
     return fetch(URL,
         {
             method: 'POST',
@@ -18,6 +17,21 @@ export function callCreateSuiteAPI(suiteName, person, questionIds) {
                 suiteName: suiteName,
                 person: person,
                 questions: questionIds
+            })
+        });
+}
+
+export function deleteSuiteAPI(person, suiteName) {
+    const URL = "http://localhost:5000/deleteSuite";
+    return fetch(URL,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                suiteName: suiteName,
+                person: person,
             })
         });
 }

@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 import './tile.css';
 import { recommendToFollowers } from '../../state/home/homeActions';
 import { getAccountInfo } from '../../state/account/accountSelectors';
+import { deleteSuiteAPI } from '../../state/suites/suitesActions';
+import { getHomeDataAction } from '../../state/home/homeActions';
 import {
     ShareButtons,
     generateShareIcon,
@@ -27,6 +29,7 @@ export class T extends Component {
         checkChangeFunc: PropTypes.func,
         suiteIds: PropTypes.array,
         question: PropTypes.object.isRequired,
+        deleteSuite: PropTypes.bool,
     }
 
     componentWillMount() {
@@ -37,6 +40,7 @@ export class T extends Component {
 
         this.onCheckChange = this.onCheckChange.bind(this);
         this.onRecommendClick = this.onRecommendClick.bind(this);
+        this.onDeleteSuiteClick = this.onDeleteSuiteClick.bind(this);
     }
 
     onCheckChange() {
@@ -57,6 +61,15 @@ export class T extends Component {
             });
     }
 
+    onDeleteSuiteClick() {
+        deleteSuiteAPI(this.props.account.username, this.props.name)
+        .then(response => {
+            return response.json();
+        }).then(json => {
+            this.props.getHomeDataAction(this.props.account.username);
+        });
+    }
+
     render() {
         const {
             name,
@@ -70,6 +83,7 @@ export class T extends Component {
         } else {
             isChecked = false;
         }
+
         return (
             <div className={this.props.type === "BIG" ? 'big' : 'small'}>
                 <h5 className='boxText'>{name}</h5>
@@ -85,6 +99,7 @@ export class T extends Component {
                 </div>
                 {this.state.alreadyRecommended || !this.props.tileLink ? <div  /> :
                     <div className="recommendLink" onClick={this.onRecommendClick}>Recommend</div>}
+                {this.props.deleteSuite ? <div className="recommendLink" onClick={this.onDeleteSuiteClick}>Delete</div> : <div />}
                 <div className='link'>
                     {this.props.linkId ? <Link className='hyperlink' to={this.props.linkId}>More Info</Link> : <div />}
                 </div>
@@ -102,6 +117,7 @@ const mapStateToProps = function(state) {
 
 const mapDispatchToProps = function(dispatch, ownProps) {
     return {
+        getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),
     };
 };
 
