@@ -233,5 +233,27 @@ def loginUser():
         else:
             return jsonify({"success": False, "error": "Incorrect password"})
 
+@app.route("/viewedQuestionCategory", methods=['POST'])
+def viewedQuestionCategory():
+    dynamodb = boto3.resource('dynamodb')
+    categoriesTables = dynamodb.Table('interview-categories')
+
+    jsonBody = json.loads(request.data)
+    category = jsonBody["category"]
+    username = jsonbody["username"]
+
+    response = categoriesTables.update_item(
+        Key={
+            'username': username
+        },
+        UpdateExpression="set info." + category + " = info." + category + " + :val",
+        ExpressionAttributeValues={
+            ':val': decimal.Decimal(1)
+        },
+        ReturnValues="UPDATED_NEW"
+    )
+
+    return jsonify(response)
+
 if __name__ == "__main__":
     update_database()
