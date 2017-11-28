@@ -216,8 +216,6 @@ export class App extends Component {
                       </Col>
                     </Row>
                   </Col>
-                </Row>
-              </Col>
 
               <Col xs={6}>
                 <Row>
@@ -263,6 +261,8 @@ export class App extends Component {
                     }
                   </Col>
 
+                </Row>
+                </Col>
                 </Row>
             }
         </div>
