@@ -75,6 +75,9 @@ export class App extends Component {
               newSuiteName: "",
           });
           if (!cancel) {
+              this.setState({
+                  showSearch: false,
+              })
               this.props.saveSuite(tempSuiteIds, tempSuiteName);
           }
       }
