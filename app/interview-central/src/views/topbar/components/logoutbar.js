@@ -16,7 +16,6 @@ export class LogoutB extends Component {
         toggleCreateSuite: PropTypes.func.isRequired,
         setHomeState: PropTypes.func,
         handleAllQuestions: PropTypes.func,
-        username: PropTypes.string,
     }
 
     componentWillMount() {
@@ -93,7 +92,7 @@ export class LogoutB extends Component {
                         <div className='homeLinkText'>
                             <Link className='homeLinkText' to="/" onClick={this.handleSetHomeState}>IC</Link>
                         </div>
-                        <div className="nameLink">Welcome, {this.props.username}</div>
+                        <div className="nameLink">Welcome, {this.props.account.username}</div>
                     </div>
                     <div className="logoutText">
                         <div className='logLink' onClick={this.handleLogout}>Logout</div>

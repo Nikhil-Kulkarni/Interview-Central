@@ -15,7 +15,6 @@ export class App extends Component {
     recommended: PropTypes.array.isRequired,
     loggedIn: PropTypes.bool.isRequired,
     saveSuite: PropTypes.func,
-    username: PropTypes.string,
   };
 
   componentWillMount() {
@@ -119,7 +118,7 @@ export class App extends Component {
 
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
-    
+
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
     console.log(recommendedQuestions);
 
@@ -130,8 +129,7 @@ export class App extends Component {
             createSuite={this.state.createSuite}
             toggleCreateSuite={this.handleToggleCreateSuite}
             setHomeState={this.handleSetHomeState}
-            handleAllQuestions={this.handleAllQuestions}
-            username={this.props.username}/>
+            handleAllQuestions={this.handleAllQuestions}/>
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
               if (event.key === "Enter") {
@@ -171,7 +169,7 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>MY SUITES</div>
-                    {this.props.loggedIn ?
+                    {this.props.loggedIn ? (this.props.mySuite.length !== 0 ?
                       this.props.mySuite.map((curSuite, index) =>
                         <Row center="xs" key={index}>
                           <Col xs={6}>
@@ -189,6 +187,9 @@ export class App extends Component {
                           </Col>
                         </Row>
                       )
+                      :
+                      <div className="loginRequest">No Suites Available</div>
+                    )
                     :
                     <div className="loginRequest">Login to View Suites</div>}
                   </Col>
@@ -199,7 +200,7 @@ export class App extends Component {
                 <Row>
                   <Col xs={12}>
                     <div className='header'>RECOMMENDED</div>
-                    {this.props.loggedIn ?
+                    {this.props.loggedIn ? (this.props.recommended.length !== 0 ?
                       this.props.recommended.map((recommendation, index) =>
                         <Row center="xs" key={index}>
                           <Col xs={6}>
@@ -214,7 +215,10 @@ export class App extends Component {
                               />
                           </Col>
                         </Row>
-                      )
+                    )
+                    :
+                    <div className="loginRequest">No Recommended Questions</div>
+                    )
                     :
                     <div className="loginRequest">Login to View Recommended</div>}
                   </Col>

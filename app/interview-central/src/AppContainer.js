@@ -44,8 +44,7 @@ export class AppCont extends Component {
                     mySuite={mySuite}
                     recommended={recommended ? recommended : []}
                     loggedIn={this.props.account ? this.props.account.success : false}
-                    saveSuite={this.handleSaveSuite}
-                    username={this.props.account.username}/>
+                    saveSuite={this.handleSaveSuite}/>
             );
         } else {
             return (
@@ -55,8 +54,7 @@ export class AppCont extends Component {
                     mySuite={[]}
                     recommended={[]}
                     loggedIn={this.props.account ? this.props.account.success : false}
-                    saveSuite={this.handleSaveSuite}
-                    username={this.props.account.username}/>
+                    saveSuite={this.handleSaveSuite}/>
                 </div>
             );
         }
