@@ -34,6 +34,7 @@ export class App extends Component {
     this.handleCheckChangeFunc = this.handleCheckChangeFunc.bind(this);
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
     this.handleSetHomeState = this.handleSetHomeState.bind(this);
+    this.handleAllQuestions = this.handleAllQuestions.bind(this);
   }
 
   onInputChange(event) {
@@ -44,15 +45,15 @@ export class App extends Component {
         this.setState({
           searchTerm: event.target.value,
           newlyDisplayed: newlyDisplayed,
+          currentlyDisplayed: newlyDisplayed,
+          showSearch: true,
         });
     } else {
         this.setState({
             searchTerm: '',
             currentlyDisplayed: this.props.questions,
-            showSearch: false,
         });
     }
-
   }
 
   handleSearch() {
@@ -63,7 +64,6 @@ export class App extends Component {
               showSearch: true,
           });
       }
-
   }
 
   handleToggleCreateSuite(curState) {
@@ -100,6 +100,13 @@ export class App extends Component {
   handleSetHomeState() {
       this.setState({
           createSuite: false,
+          showSearch: false,
+      });
+  }
+
+  handleAllQuestions() {
+      this.setState({
+          showSearch: true,
       });
   }
 
@@ -109,7 +116,12 @@ export class App extends Component {
 
     return (
       <div className="App">
-        <LogoutBar loggedIn={this.props.loggedIn} createSuite={this.state.createSuite} toggleCreateSuite={this.handleToggleCreateSuite} setHomeState={this.handleSetHomeState}/>
+        <LogoutBar
+            loggedIn={this.props.loggedIn}
+            createSuite={this.state.createSuite}
+            toggleCreateSuite={this.handleToggleCreateSuite}
+            setHomeState={this.handleSetHomeState}
+            handleAllQuestions={this.handleAllQuestions}/>
         <div className='title'>INTERVIEW CENTRAL</div>
         <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
               if (event.key === "Enter") {
