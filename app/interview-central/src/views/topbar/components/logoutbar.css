@@ -8,8 +8,8 @@
     float: left;
     margin-right: 20px;
     margin-top: 25px;
-    font-family: Orbitron, sans-serif;  
-    font-size: 24px;    
+    font-family: Orbitron, sans-serif;
+    font-size: 24px;
 }
 
 .logoutText {
@@ -31,6 +31,24 @@
 .logLink {
     display: inline;
     color: #10354B;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.cancelSuite {
+    display: inline;
+    color: #FF0000;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 10px;
+    cursor: pointer;
+}
+
+.saveSuite {
+    display: inline;
+    color: #56CCF2;
     font-size: 14px;
     text-decoration: none;
     padding: 10px;
@@ -73,6 +91,6 @@
 
 .friendHeader {
     color: white;
-    font-family: Orbitron, sans-serif;  
-    font-size: 24px;    
+    font-family: Orbitron, sans-serif;
+    font-size: 24px;
 }

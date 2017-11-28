@@ -25,6 +25,7 @@ export class LogoutB extends Component {
         this.handleCloseModal = this.handleCloseModal.bind(this);
         this.handleAddFriend = this.handleAddFriend.bind(this);
         this.handleSetHomeState = this.handleSetHomeState.bind(this);
+        this.handleCancelSuite = this.handleCancelSuite.bind(this);
 
         this.state = {
             showModal: false,
@@ -62,11 +63,15 @@ export class LogoutB extends Component {
     handleToggleCreateSuite() {
         if (this.props.createSuite) {
             //Clicked on "Save Suite"
-            this.props.toggleCreateSuite(false);
+            this.props.toggleCreateSuite(false, false);
         } else {
             // Clicked on "Create Suite"
-            this.props.toggleCreateSuite(true);
+            this.props.toggleCreateSuite(true, false);
         }
+    }
+
+    handleCancelSuite() {
+        this.props.toggleCreateSuite(false, true);
     }
 
     handleSetHomeState() {
@@ -98,7 +103,10 @@ export class LogoutB extends Component {
                         <div className="logLink" onClick={this.props.handleAllQuestions}>All Questions</div>
                     </div>
                     <div className="logoutText">
-                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                        {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="saveSuite" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
+                    </div>
+                    <div className="logoutText">
+                        {!this.props.createSuite ? null : <div className="cancelSuite" onClick={this.handleCancelSuite}>Cancel</div>}
                     </div>
                     <ReactModal isOpen={this.state.showModal} contentLabel="Add Friend Modal" className="addFriendModal">
                         <div className="loginModalContainer">
