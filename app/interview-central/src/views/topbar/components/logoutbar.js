@@ -15,6 +15,7 @@ export class LogoutB extends Component {
         createSuite: PropTypes.bool.isRequired,
         toggleCreateSuite: PropTypes.func.isRequired,
         setHomeState: PropTypes.func,
+        handleAllQuestions: PropTypes.func,
     }
 
     componentWillMount() {
@@ -92,6 +93,9 @@ export class LogoutB extends Component {
                     </div>
                     <div className="logoutText">
                         <div className="logLink" onClick={this.handleOpenModal}>Add Friend</div>
+                    </div>
+                    <div className="logoutText">
+                        <div className="logLink" onClick={this.props.handleAllQuestions}>All Questions</div>
                     </div>
                     <div className="logoutText">
                         {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="logLink" onClick={this.handleToggleCreateSuite}>Save Suite</div>}
