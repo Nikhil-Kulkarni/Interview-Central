@@ -19,7 +19,7 @@ export class QuestionCont extends Component {
     }
 
     componentDidMount() {
-        this.setQuestion();    
+        this.setQuestion();
     }
 
     setQuestion() {
@@ -28,12 +28,16 @@ export class QuestionCont extends Component {
                 return response.json();
             }).then(json => {
                 this.setState({question: json});
-                this.setSentiment();            
+                this.setSentiment();
             });
     }
 
     setSentiment() {
-        getSentiment(this.state.question.category, this.state.question.name)
+        let chosenQuestion = this.state.question.category;
+        if (this.state.question.category === 'String/Array') {
+            chosenQuestion = 'String%2FArray';
+        }
+        getSentiment(chosenQuestion, this.state.question.name)
             .then(response => {
                 return response.json();
             }).then(json => {
@@ -53,7 +57,7 @@ export class QuestionCont extends Component {
         if (this.state.question) {
             return (
                 <div>
-                    <Question question={this.state.question} loggedIn={this.props.account.success} 
+                    <Question question={this.state.question} loggedIn={this.props.account.success}
                         username={this.props.account.username} linkClick={this.handleLinkClick} sentiment={this.state.sentiment}/>
                 </div>
             );
@@ -61,7 +65,7 @@ export class QuestionCont extends Component {
 
         return (
             <div>
-                <Question question={{}} loggedIn={this.props.account.success}/>                
+                <Question question={{}} loggedIn={this.props.account.success}/>
             </div>
         );
     }
@@ -70,18 +74,18 @@ export class QuestionCont extends Component {
 const mapStateToProps = function(state) {
     return {
         questions: getQuestions(state),
-        account: getAccountInfo(state),        
+        account: getAccountInfo(state),
     };
 };
 
 const mapDispatchToProps = function(dispatch) {
-    return {        
+    return {
     };
 };
 
 const QuestionContainer = connect(
-    mapStateToProps, 
-    mapDispatchToProps,    
+    mapStateToProps,
+    mapDispatchToProps,
 ) (QuestionCont);
 
 export default QuestionContainer;
