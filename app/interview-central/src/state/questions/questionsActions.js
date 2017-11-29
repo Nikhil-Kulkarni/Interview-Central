@@ -28,7 +28,7 @@ export function getQuestionsAction() {
         // dispatch(getQuestions());
         return getQuestionsAPI().then(([response, json]) => {
             if (response.status === 200) {
-                dispatch(getQuestionsSuccess(json));                
+                dispatch(getQuestionsSuccess(json));
             } else {
                 dispatch(questionsError());
             }
@@ -49,5 +49,10 @@ export function getQuestionWithIdAPI(questionId) {
 
 export function getSentiment(category, question) {
     const URL=`http://localhost:5000/getSentiment/${category}/${question}`;
-    return fetch(URL, { method: 'GET'});    
+    return fetch(URL, { method: 'GET'});
+}
+
+export function getQuestionLeaderboard() {
+    const URL="http://localhost:5000/getQuestionLeaderboard";
+    return fetch(URL, { method: 'GET'});
 }

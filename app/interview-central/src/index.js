@@ -5,6 +5,7 @@ import LoginContainer from './LoginContainer';
 import RegistrationContainer from './RegistrationContainer';
 import QuestionContainer from './QuestionContainer';
 import SuiteContainer from './SuiteContainer';
+import TopQuestionsContainer from './TopQuestionsContainer';
 import './index.css';
 import { Provider } from 'react-redux';
 import { configure } from './config/config-store';
@@ -17,8 +18,9 @@ ReactDOM.render(
             <div>
                 <Route path="/login" component={LoginContainer}/>
                 <Route path="/register" component={RegistrationContainer}/>
-                <Route path={"/suite/:suiteId"} component={SuiteContainer}/>  
+                <Route path={"/suite/:suiteId"} component={SuiteContainer}/>
                 <Route path={"/question/:questionId"} component={QuestionContainer}/>
+                <Route path={"/topquestions"} component={TopQuestionsContainer} />
                 <Route exact={true} path="/" component={AppContainer}/>
             </div>
         </Router>

@@ -317,6 +317,52 @@ def getRecommendedCategory(username):
     }
     return jsonify(itemsDict)
 
+@app.route("/getQuestionLeaderboard", methods=['GET'])
+def getQuestionLeaderboard():
+    dynamodb = boto3.resource('dynamodb')
+    questionCountTable = dynamodb.Table('interview-questions-click')
+
+    response = questionCountTable.scan()
+    items = response["Items"]
+
+    newlist = sorted(items, key=lambda k: k['numClicks'], reverse=True)
+
+    for item in newlist:
+        item['numClicks'] = int(item['numClicks'])
+
+    return jsonify(newlist)
+
+@app.route("/increaseQuestionCount", methods=['POST'])
+def increaseQuestionCount():
+    dynamodb = boto3.resource('dynamodb')
+    questionCountTable = dynamodb.Table('interview-questions-click')
+
+    jsonBody = json.loads(request.data)
+    question = jsonBody["name"]
+
+    filtering_exp = Key("name").eq(question)
+    response = questionCountTable.scan(FilterExpression=filtering_exp)
+
+    if response['Count'] == 0:
+        response = questionCountTable.put_item(
+            Item = {
+                'name': str(question),
+                'numClicks': 1
+            }
+        )
+
+        return jsonify(response)
+    else:
+        newNumClicks = response['Items'][0]['numClicks'] + 1
+        response = questionCountTable.put_item(
+            Item = {
+                'name': str(question),
+                'numClicks': newNumClicks
+            }
+        )
+        return jsonify(response)
+
+
 @app.route("/viewedQuestionCategory", methods=['POST'])
 def viewedQuestionCategory():
     dynamodb = boto3.resource('dynamodb')

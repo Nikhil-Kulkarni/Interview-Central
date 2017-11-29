@@ -42,8 +42,8 @@ export class AppCont extends Component {
 
         if (this.props.success) {
             let recommendedQuestions = _.filter(items.questions.Items, question => question.category === this.props.getRecommendedCategory);
-            let randomQuestion = recommendedQuestions[Math.floor((Math.random() * recommendedQuestions.length))];            
-        
+            let randomQuestion = recommendedQuestions[Math.floor((Math.random() * recommendedQuestions.length))];
+
             return (
                 <App
                     questions={items.questions.Items}
@@ -82,7 +82,7 @@ const mapDispatchToProps = function(dispatch) {
     return {
         getQuestions: dispatch(getQuestionsAction()),
         getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),
-        getRecommended: (username) => dispatch(getRecommendedAction(username)),        
+        getRecommended: (username) => dispatch(getRecommendedAction(username)),
     };
 };
 
