@@ -5,6 +5,7 @@ import LogoutBar from './views/topbar/components/logoutbar';
 import PropTypes from 'prop-types';
 import { Row, Col } from 'react-flexbox-grid';
 import Textbox from './views/textbox/textbox';
+import Dropdown from 'react-dropdown';
 import _ from 'lodash';
 
 export class App extends Component {
@@ -27,6 +28,8 @@ export class App extends Component {
       createSuite: false,
       suiteListIds: [],
       newSuiteName: "",
+      categoryOptions: ['All', 'Trees', 'Dynamic Programming', 'HashMaps', 'Strings'],
+      selectedCategory: "",
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -36,6 +39,7 @@ export class App extends Component {
     this.handleTextBoxChange = this.handleTextBoxChange.bind(this);
     this.handleSetHomeState = this.handleSetHomeState.bind(this);
     this.handleAllQuestions = this.handleAllQuestions.bind(this);
+    this.handleSelectedCategory = this.handleSelectedCategory.bind(this);
   }
 
   onInputChange(event) {
@@ -117,6 +121,14 @@ export class App extends Component {
       });
   }
 
+  handleSelectedCategory(event) {
+      console.log("Selected Category: ");
+      console.log(event);
+      this.setState({
+          selectedCategory: event.value,
+      });
+  }
+
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
     console.log("IDS");
@@ -134,70 +146,76 @@ export class App extends Component {
             setHomeState={this.handleSetHomeState}
             handleAllQuestions={this.handleAllQuestions}/>
         <div className='title'>INTERVIEW CENTRAL</div>
-        <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
-              if (event.key === "Enter") {
-                this.handleSearch();
-              }
-            }}/>
-        <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
-        {this.state.showSearch || this.state.createSuite ?
-            <div>
-                {this.state.createSuite ?
-                    <div>
-                        <div className='header'> Suite Name</div>
-                        <br />
-                        <Textbox className="suiteNameBox" name="suiteName" placeholder="Enter Suite Name" password={false} handleChange={this.handleTextBoxChange}/>
-                    </div> : null}
-                {this.state.currentlyDisplayed.map((question, index) =>
-                  <Tile
-                    name={question.name}
-                    description={question.description}
-                    type="BIG"
-                    tileLink={question.link}
-                    linkId={`/question/${question.id}`}
-                    key={index}
-                    createSuite={this.state.createSuite}
-                    checkChangeFunc={this.handleCheckChangeFunc}
-                    suiteIds={this.state.suiteListIds}
-                    question={question}
-                  />
-                )}
+        <div className="searchContainer">
+            <input type="text" placeholder="SEARCH" className='search' onChange={this.onInputChange} onKeyPress={event => {
+                  if (event.key === "Enter") {
+                    this.handleSearch();
+                  }
+                }}/>
+            <div className="dropDown">
+                <Dropdown options={this.state.categoryOptions} onChange={this.handleSelectedCategory} value={this.state.selectedCategory} placeholder="Filter" />
             </div>
+            <button className="searchButton" onClick={this.handleSearch}>SEARCH</button>
+        </div>
+        <div className="suiteRecContainer">
+            {this.state.showSearch || this.state.createSuite ?
+                <div>
+                    {this.state.createSuite ?
+                        <div>
+                            <div className='header'> Suite Name</div>
+                            <br />
+                            <Textbox className="suiteNameBox" name="suiteName" placeholder="Enter Suite Name" password={false} handleChange={this.handleTextBoxChange}/>
+                        </div> : null}
+                    {this.state.currentlyDisplayed.map((question, index) =>
+                      <Tile
+                        name={question.name}
+                        description={question.description}
+                        type="BIG"
+                        tileLink={question.link}
+                        linkId={`/question/${question.id}`}
+                        key={index}
+                        createSuite={this.state.createSuite}
+                        checkChangeFunc={this.handleCheckChangeFunc}
+                        suiteIds={this.state.suiteListIds}
+                        question={question}
+                      />
+                    )}
+                </div>
 
-            :
+                :
 
-            <Row around="xs">
+                <Row around="xs">
 
-              <Col xs={6}>
-                <Row>
-                  <Col xs={12}>
-                    <div className='header'>MY SUITES</div>
-                    {this.props.loggedIn ? (this.props.mySuite.length !== 0 ?
-                      this.props.mySuite.map((curSuite, index) =>
-                        <Row center="xs" key={index}>
-                          <Col xs={6}>
-                            <Tile
-                              name={curSuite.suiteName}
-                              description={curSuite.questions.join()}
-                              type="SMALL"
-                              key={index}
-                              linkId={`/suite/${curSuite.suiteId}`}
-                              createSuite={this.state.createSuite}
-                              checkChangeFunc={this.handleCheckChangeFunc}
-                              question={{}}
-                              deleteSuite={true}
-                            />
-                          </Col>
-                        </Row>
-                      )
-                      :
-                      <div className="loginRequest">No Suites Available</div>
-                    )
-                    :
-                    <div className="loginRequest">Login to View Suites</div>}
+                  <Col xs={6}>
+                    <Row>
+                      <Col xs={12}>
+                        <div className='header'>MY SUITES</div>
+                        {this.props.loggedIn ? (this.props.mySuite.length !== 0 ?
+                          this.props.mySuite.map((curSuite, index) =>
+                            <Row center="xs" key={index}>
+                              <Col xs={6}>
+                                <Tile
+                                  name={curSuite.suiteName}
+                                  description={curSuite.questions.join()}
+                                  type="SMALL"
+                                  key={index}
+                                  linkId={`/suite/${curSuite.suiteId}`}
+                                  createSuite={this.state.createSuite}
+                                  checkChangeFunc={this.handleCheckChangeFunc}
+                                  question={{}}
+                                  deleteSuite={true}
+                                />
+                              </Col>
+                            </Row>
+                          )
+                          :
+                          <div className="loginRequest">No Suites Available</div>
+                        )
+                        :
+                        <div className="loginRequest">Login to View Suites</div>}
+                      </Col>
+                    </Row>
                   </Col>
-                </Row>
-              </Col>
 
               <Col xs={6}>
                 <Row>
@@ -224,7 +242,7 @@ export class App extends Component {
                     )
                     :
                     <div className="loginRequest">Login to View Recommended</div>}
-                    {this.props.loggedIn && this.props.recommendedQuestion ? 
+                    {this.props.loggedIn && this.props.recommendedQuestion ?
                                           <Row center="xs">
                                           <Col xs={6}>
                                             <Tile
@@ -247,11 +265,12 @@ export class App extends Component {
                       <div />
                     }
                   </Col>
-                </Row>
-              </Col>
 
-            </Row>
-        }
+                </Row>
+                </Col>
+                </Row>
+            }
+        </div>
       </div>
     );
   }
