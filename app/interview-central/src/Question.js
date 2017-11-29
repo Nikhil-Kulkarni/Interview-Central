@@ -20,7 +20,7 @@ export default class Question extends Component {
         loggedIn: PropTypes.bool.isRequired,
         username: PropTypes.string,
         linkClick: PropTypes.func,
-        sentiment: PropTypes.func,
+        sentiment: PropTypes.object,
     }
 
     componentWillMount() {
