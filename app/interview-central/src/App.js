@@ -220,7 +220,7 @@ export class App extends Component {
                         </Row>
                     )
                     :
-                    <div className="loginRequest">No Recommended Questions</div>
+                    <div />
                     )
                     :
                     <div className="loginRequest">Login to View Recommended</div>}
@@ -240,6 +240,11 @@ export class App extends Component {
                                         </Row>
                                         :
                                         <div />
+                    }
+                    {this.props.loggedIn && !this.props.recommendedQuestion && this.props.recommended.length === 0 ? 
+                    <div className="loginRequest">No Recommended Questions</div>
+                      :
+                      <div />
                     }
                   </Col>
                 </Row>

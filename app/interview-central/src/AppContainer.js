@@ -9,6 +9,7 @@ import { getAccountInfo } from './state/account/accountSelectors';
 import { callCreateSuiteAPI } from './state/suites/suitesActions';
 import { getHomeDataAction } from './state/home/homeActions';
 import { getRecommendedCategory } from './state/recommended/recommendedSelectors';
+import { getRecommendedAction } from './state/recommended/recommendedActions';
 
 export class AppCont extends Component {
 
@@ -81,6 +82,7 @@ const mapDispatchToProps = function(dispatch) {
     return {
         getQuestions: dispatch(getQuestionsAction()),
         getHomeDataAction: (username) => dispatch(getHomeDataAction(username)),
+        getRecommended: (username) => dispatch(getRecommendedAction(username)),        
     };
 };
 

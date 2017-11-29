@@ -5,6 +5,7 @@ import Question from './Question';
 import { getQuestions } from './state/questions/questionsSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
 import { getQuestionWithIdAPI } from './state/questions/questionsActions';
+import { viewedQuestionCategoryAPI } from './state/recommended/recommendedActions';
 
 export class QuestionCont extends Component {
 
@@ -12,6 +13,7 @@ export class QuestionCont extends Component {
         this.state = {
             question: {},
         }
+        this.handleLinkClick = this.handleLinkClick.bind(this);
     }
 
     componentDidMount() {
@@ -27,11 +29,20 @@ export class QuestionCont extends Component {
             });
     }
 
+    handleLinkClick(username, category) {
+        viewedQuestionCategoryAPI(username, category)
+            .then(response => {
+                return response.json();
+            }).then(json => {
+            });
+    }
+
     render() {
         if (this.state.question) {
             return (
                 <div>
-                    <Question question={this.state.question} loggedIn={this.props.account.success}/>
+                    <Question question={this.state.question} loggedIn={this.props.account.success} 
+                        username={this.props.account.username} linkClick={this.handleLinkClick}/>
                 </div>
             );
         }

@@ -40,3 +40,18 @@ export function getRecommendedAPI(username) {
     return fetch(URL, { method: 'GET'})
         .then( response => Promise.all([response, response.json()]));
 }
+
+export function viewedQuestionCategoryAPI(username, category) {
+    const URL = `http://localhost:5000/viewedQuestionCategory`;
+    return fetch(URL,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username,
+                category: category,
+            })
+        });
+}

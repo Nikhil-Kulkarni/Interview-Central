@@ -18,9 +18,16 @@ export default class Question extends Component {
     static propTypes = {
         question: PropTypes.object.isRequired,
         loggedIn: PropTypes.bool.isRequired,
+        username: PropTypes.string,
+        linkClick: PropTypes.func,
     }
 
     componentWillMount() {
+        this.handleLinkClick = this.handleLinkClick.bind(this);
+    }
+
+    handleLinkClick() {
+        this.props.linkClick(this.props.username, this.props.question.category)
     }
 
     render() {
@@ -41,7 +48,7 @@ export default class Question extends Component {
                         <h3>Category</h3>
                         <p className="questionBoxText">{question.category}</p>
                         <h3>Link</h3>
-                        <a href={question.link} className="questionBoxLink">{question.link}</a>
+                        <a href={question.link} className="questionBoxLink" onClick={this.handleLinkClick}>{question.link}</a>
                     </div>
                     <div className='shareLink'>
                     {question.link ? 
