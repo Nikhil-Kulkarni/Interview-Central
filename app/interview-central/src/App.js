@@ -128,14 +128,9 @@ export class App extends Component {
   }
 
   handleSelectedCategory(event) {
-      console.log("Selected Category: ");
-      console.log(event.value);
       let newQuestions = [];
-      console.log(this.props.questions);
       if (event.value !== 'All') {
           newQuestions = _.filter(this.props.questions, question => question.category === event.value);
-          console.log("newlyDisplayed");
-          console.log(newQuestions);
       } else {
           newQuestions = this.props.questions;
       }
@@ -149,11 +144,7 @@ export class App extends Component {
 
   render() {
     let recommendedIds = _.map(this.props.recommended, recommendation => recommendation.questionId);
-    console.log("IDS");
-    console.log(recommendedIds);
     let recommendedQuestions = _.filter(this.props.questions, question => recommendedIds.includes(question.id));
-    console.log("RECOMMENDE");
-    console.log(recommendedQuestions);
 
     return (
       <div className="App">

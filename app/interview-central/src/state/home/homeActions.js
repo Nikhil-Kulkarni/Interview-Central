@@ -27,11 +27,9 @@ export function getHomeDataError() {
 }
 
 export function getHomeDataAction(username) {
-    console.log("GetHomeDataAction");
     return (dispatch) => {
         return getHomeDataAPI(username).then(([response, json]) => {
             if (response.status === 200) {
-                console.log(json);
                 dispatch(getHomeDataSuccess(json));
             } else {
                 dispatch(getHomeDataError());

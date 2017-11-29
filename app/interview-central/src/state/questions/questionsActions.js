@@ -56,3 +56,17 @@ export function getQuestionLeaderboard() {
     const URL="http://localhost:5000/getQuestionLeaderboard";
     return fetch(URL, { method: 'GET'});
 }
+
+export function increaseQuestionCount(name) {
+    const URL="http://localhost:5000/increaseQuestionCount";
+    return fetch(URL,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                name: name,
+            })
+        });
+}

@@ -21,11 +21,8 @@ export class AppCont extends Component {
     handleSaveSuite(suiteListIds, suiteName) {
         callCreateSuiteAPI(suiteName, this.props.account.username, suiteListIds)
             .then(response => {
-                console.log("Response");
                 return response.json();
             }).then(json => {
-                console.log("JSON");
-                console.log(json);
                 this.refreshPageInfo();
             });
     }

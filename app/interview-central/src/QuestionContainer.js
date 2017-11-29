@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Question from './Question';
 import { getQuestions } from './state/questions/questionsSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
-import { getQuestionWithIdAPI, getSentiment } from './state/questions/questionsActions';
+import { getQuestionWithIdAPI, getSentiment, increaseQuestionCount } from './state/questions/questionsActions';
 import { viewedQuestionCategoryAPI } from './state/recommended/recommendedActions';
 
 export class QuestionCont extends Component {
@@ -16,6 +16,7 @@ export class QuestionCont extends Component {
         }
         this.handleLinkClick = this.handleLinkClick.bind(this);
         this.setSentiment = this.setSentiment.bind(this);
+        this.handleLeaderClick = this.handleLeaderClick.bind(this);
     }
 
     componentDidMount() {
@@ -53,12 +54,20 @@ export class QuestionCont extends Component {
             });
     }
 
+    handleLeaderClick(name) {
+        increaseQuestionCount(name)
+            .then(response => {
+                return response.json();
+            }).then(json => {
+            });
+    }
+
     render() {
         if (this.state.question) {
             return (
                 <div>
                     <Question question={this.state.question} loggedIn={this.props.account.success}
-                        username={this.props.account.username} linkClick={this.handleLinkClick} sentiment={this.state.sentiment}/>
+                        username={this.props.account.username} linkClick={this.handleLinkClick} sentiment={this.state.sentiment} leaderClick={this.handleLeaderClick}/>
                 </div>
             );
         }

@@ -20,6 +20,7 @@ export default class Question extends Component {
         loggedIn: PropTypes.bool.isRequired,
         username: PropTypes.string,
         linkClick: PropTypes.func,
+        leaderClick: PropTypes.func,
         sentiment: PropTypes.object,
     }
 
@@ -28,7 +29,8 @@ export default class Question extends Component {
     }
 
     handleLinkClick() {
-        this.props.linkClick(this.props.username, this.props.question.category)
+        this.props.linkClick(this.props.username, this.props.question.category);
+        this.props.leaderClick(this.props.question.name);
     }
 
     render() {

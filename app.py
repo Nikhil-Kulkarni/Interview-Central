@@ -348,7 +348,7 @@ def increaseQuestionCount():
     if response['Count'] == 0:
         response = questionCountTable.put_item(
             Item = {
-                'name': str(question),
+                'name': question,
                 'numClicks': 1
             }
         )

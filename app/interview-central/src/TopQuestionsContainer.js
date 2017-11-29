@@ -26,7 +26,6 @@ export class TopQuestionsCont extends Component {
                 this.setState({
                     topQuestions: json,
                 });
-                console.log(this.state.topQuestions);
             });
     }
 

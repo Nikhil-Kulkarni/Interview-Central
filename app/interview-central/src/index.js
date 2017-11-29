@@ -20,7 +20,7 @@ ReactDOM.render(
                 <Route path="/register" component={RegistrationContainer}/>
                 <Route path={"/suite/:suiteId"} component={SuiteContainer}/>
                 <Route path={"/question/:questionId"} component={QuestionContainer}/>
-                <Route path={"/topquestions"} component={TopQuestionsContainer} />
+                <Route path={"/topQuestions"} component={TopQuestionsContainer} />
                 <Route exact={true} path="/" component={AppContainer}/>
             </div>
         </Router>
