@@ -342,13 +342,13 @@ def increaseQuestionCount():
     jsonBody = json.loads(request.data)
     question = jsonBody["name"]
 
-    filtering_exp = Key("name").eq(question)
+    filtering_exp = Key("name").eq(question.encode('utf-8'))
     response = questionCountTable.scan(FilterExpression=filtering_exp)
 
     if response['Count'] == 0:
         response = questionCountTable.put_item(
             Item = {
-                'name': question,
+                'name': question.encode('utf-8'),
                 'numClicks': 1
             }
         )
@@ -358,7 +358,7 @@ def increaseQuestionCount():
         newNumClicks = response['Items'][0]['numClicks'] + 1
         response = questionCountTable.put_item(
             Item = {
-                'name': question,
+                'name': question.encode('utf-8'),
                 'numClicks': newNumClicks
             }
         )

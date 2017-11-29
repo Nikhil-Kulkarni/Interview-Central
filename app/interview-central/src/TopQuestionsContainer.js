@@ -44,7 +44,7 @@ export class TopQuestionsCont extends Component {
                               accessor: "name"
                           },
                           {
-                              Header: "Click Count",
+                              Header: "View Count",
                               accessor: "numClicks"
                           }
                       ]}
