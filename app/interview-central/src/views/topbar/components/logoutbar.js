@@ -12,8 +12,8 @@ import { addFriendAction } from '../../../state/account/accountActions';
 export class LogoutB extends Component {
     static propTypes = {
         loggedIn: PropTypes.bool.isRequired,
-        createSuite: PropTypes.bool.isRequired,
-        toggleCreateSuite: PropTypes.func.isRequired,
+        createSuite: PropTypes.bool,
+        toggleCreateSuite: PropTypes.func,
         setHomeState: PropTypes.func,
         handleAllQuestions: PropTypes.func,
     }
@@ -102,6 +102,9 @@ export class LogoutB extends Component {
                     </div>
                     <div className="logoutText">
                         <div className="logLink" onClick={this.props.handleAllQuestions}>All Questions</div>
+                    </div>
+                    <div className="logoutText">
+                        <Link className='logLink' to="/topquestions" onClick={this.handleSetHomeState}>Top Questions</Link>
                     </div>
                     <div className="logoutText">
                         {!this.props.createSuite ? <div className="logLink" onClick={this.handleToggleCreateSuite}>Create Suite</div> : <div className="saveSuite" onClick={this.handleToggleCreateSuite}>Save Suite</div>}

@@ -34,11 +34,7 @@ export class TopQuestionsCont extends Component {
 
             <div className="App">
                   <LogoutBar
-                      loggedIn={this.props.loggedIn}
-                      createSuite={this.state.createSuite}
-                      toggleCreateSuite={this.handleToggleCreateSuite}
-                      setHomeState={this.handleSetHomeState}
-                      handleAllQuestions={this.handleAllQuestions}/>
+                      loggedIn={this.props.account ? this.props.account.success : false}/>
                   <div className='title'>INTERVIEW CENTRAL</div>
                   <ReactTable
                       data={this.state.topQuestions}
