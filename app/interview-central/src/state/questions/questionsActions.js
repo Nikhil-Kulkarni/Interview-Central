@@ -46,3 +46,8 @@ export function getQuestionWithIdAPI(questionId) {
     const URL = `http://localhost:5000/question/${questionId}`;
     return fetch(URL, { method: 'GET'});
 }
+
+export function getSentiment(category, question) {
+    const URL=`http://localhost:5000/getSentiment/${category}/${question}`;
+    return fetch(URL, { method: 'GET'});    
+}

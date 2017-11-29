@@ -20,6 +20,7 @@ export default class Question extends Component {
         loggedIn: PropTypes.bool.isRequired,
         username: PropTypes.string,
         linkClick: PropTypes.func,
+        sentiment: PropTypes.func,
     }
 
     componentWillMount() {
@@ -41,8 +42,16 @@ export default class Question extends Component {
                     <div className="questionBoxContents">
                         <h3>Description</h3>
                         <p className="questionBoxText">{question.description}</p>
-                        <h3>Difficulty</h3>
-                        <p className="questionBoxText">{question.difficulty}</p>
+                        <h3>Sentiment</h3>
+                        {this.props.sentiment ?
+                            <div>
+                                <p className="questionBoxText">Positive Sentiment: {this.props.sentiment.positive}%</p>   
+                                <p className="questionBoxText">Negative Sentiment: {this.props.sentiment.negative}%</p>
+                            </div>                                                 
+                            :
+                            <p className="questionBoxText">N/A</p>                                                    
+                        }
+
                         <h3>Submissions</h3>
                         <p className="questionBoxText">{question.submissions}</p>
                         <h3>Category</h3>

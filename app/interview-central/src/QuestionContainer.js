@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import Question from './Question';
 import { getQuestions } from './state/questions/questionsSelectors';
 import { getAccountInfo } from './state/account/accountSelectors';
-import { getQuestionWithIdAPI } from './state/questions/questionsActions';
+import { getQuestionWithIdAPI, getSentiment } from './state/questions/questionsActions';
 import { viewedQuestionCategoryAPI } from './state/recommended/recommendedActions';
 
 export class QuestionCont extends Component {
@@ -12,12 +12,14 @@ export class QuestionCont extends Component {
     componentWillMount() {
         this.state = {
             question: {},
+            sentiment: {},
         }
         this.handleLinkClick = this.handleLinkClick.bind(this);
+        this.setSentiment = this.setSentiment.bind(this);
     }
 
     componentDidMount() {
-        this.setQuestion();        
+        this.setQuestion();    
     }
 
     setQuestion() {
@@ -26,6 +28,16 @@ export class QuestionCont extends Component {
                 return response.json();
             }).then(json => {
                 this.setState({question: json});
+                this.setSentiment();            
+            });
+    }
+
+    setSentiment() {
+        getSentiment(this.state.question.category, this.state.question.name)
+            .then(response => {
+                return response.json();
+            }).then(json => {
+                this.setState({sentiment: json});
             });
     }
 
@@ -42,7 +54,7 @@ export class QuestionCont extends Component {
             return (
                 <div>
                     <Question question={this.state.question} loggedIn={this.props.account.success} 
-                        username={this.props.account.username} linkClick={this.handleLinkClick}/>
+                        username={this.props.account.username} linkClick={this.handleLinkClick} sentiment={this.state.sentiment}/>
                 </div>
             );
         }

@@ -8,6 +8,7 @@ from flask_cors import CORS
 from flask import request
 from boto3.dynamodb.conditions import Key, Attr
 from botocore.exceptions import ClientError
+from Twitter import TwitterClient
 import decimal
 app = Flask(__name__)
 CORS(app)
@@ -258,6 +259,48 @@ def loginUser():
             return jsonify({"success": True, "username": username})
         else:
             return jsonify({"success": False, "error": "Incorrect password"})
+
+@app.route("/getSentiment/<category>/<question>", methods=['GET'])
+def getCategorySentiment(category, question):
+    # creating object of TwitterClient Class
+    api = TwitterClient()
+    # calling function to get tweets
+    tweets = api.get_tweets(query = question, count = 200)
+
+    if (len(tweets) != 0):
+        ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+        ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+
+
+        positive = 100*len(ptweets)/len(tweets)
+        negative = 100*len(ntweets)/len(tweets)
+
+        sentiment = {
+            'positive': positive,
+            'negative': negative
+        }
+
+        return jsonify(sentiment)
+    else:
+        if category == "CombinationsandPermutations":
+            category = "Combinations"
+        elif category == "String/Array":
+            category = "String Array"
+
+        tweets = api.get_tweets(query = category, count = 200)
+
+        ptweets = [tweet for tweet in tweets if tweet['sentiment'] == 'positive']
+        ntweets = [tweet for tweet in tweets if tweet['sentiment'] == 'negative']
+
+        positive = 100*len(ptweets)/len(tweets)
+        negative = 100*len(ntweets)/len(tweets)
+
+        sentiment = {
+            'positive': positive,
+            'negative': negative
+        }
+
+        return jsonify(sentiment)
 
 @app.route("/getRecommendedCategory/<username>", methods=['GET'])
 def getRecommendedCategory(username):
