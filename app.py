@@ -286,6 +286,8 @@ def getCategorySentiment(category, question):
             category = "Combinations"
         elif category == "String%2FArray":
             category = "String Array"
+        elif category == "BitManipulation":
+            category = "Bit Manipulation"
 
         tweets = api.get_tweets(query = category, count = 200)
 
