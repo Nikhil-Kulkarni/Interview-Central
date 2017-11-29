@@ -35,7 +35,7 @@ export class QuestionCont extends Component {
     setSentiment() {
         let chosenQuestion = this.state.question.category;
         if (this.state.question.category === 'String/Array') {
-            chosenQuestion = 'String%2FArray';
+            chosenQuestion = 'String Array';
         }
         getSentiment(chosenQuestion, this.state.question.name)
             .then(response => {
