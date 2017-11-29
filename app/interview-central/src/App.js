@@ -28,7 +28,7 @@ export class App extends Component {
       createSuite: false,
       suiteListIds: [],
       newSuiteName: "",
-      categoryOptions: ['All', 'Trees', 'Dynamic Programming', 'HashMaps', 'Strings'],
+      categoryOptions: ['All', 'BitManipulation', 'CombinationsandPermutations', 'DynamicProgramming', 'Graph', 'HashMap',  'Heap', 'LinkedList', 'Math',  'Matrix', 'SegmentTree', 'Sorting', 'String/Array',  'Tree', 'Trie'],
       selectedCategory: "",
     };
 
@@ -44,7 +44,7 @@ export class App extends Component {
 
   onInputChange(event) {
     if (event.target.value !== "") {
-        let newlyDisplayed = _.filter(this.props.questions, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
+        let newlyDisplayed = _.filter(this.state.currentlyDisplayed, question => question.name.toLowerCase().includes(event.target.value.toLowerCase())
          || question.description.toLowerCase().includes(event.target.value.toLowerCase()));
 
         this.setState({
@@ -52,6 +52,12 @@ export class App extends Component {
           newlyDisplayed: newlyDisplayed,
           currentlyDisplayed: newlyDisplayed,
           showSearch: true,
+        });
+    } else if (this.state.selectedCategory !== 'All') {
+        let newQuestions = _.filter(this.props.questions, question => question.category === this.state.selectedCategory);
+        this.setState({
+            searchTerm: '',
+            currentlyDisplayed: newQuestions,
         });
     } else {
         this.setState({
@@ -123,9 +129,21 @@ export class App extends Component {
 
   handleSelectedCategory(event) {
       console.log("Selected Category: ");
-      console.log(event);
+      console.log(event.value);
+      let newQuestions = [];
+      console.log(this.props.questions);
+      if (event.value !== 'All') {
+          newQuestions = _.filter(this.props.questions, question => question.category === event.value);
+          console.log("newlyDisplayed");
+          console.log(newQuestions);
+      } else {
+          newQuestions = this.props.questions;
+      }
+
       this.setState({
+          currentlyDisplayed: newQuestions,
           selectedCategory: event.value,
+          showSearch: true,
       });
   }
 
@@ -259,7 +277,7 @@ export class App extends Component {
                                         :
                                         <div />
                     }
-                    {this.props.loggedIn && !this.props.recommendedQuestion && this.props.recommended.length === 0 ? 
+                    {this.props.loggedIn && !this.props.recommendedQuestion && this.props.recommended.length === 0 ?
                     <div className="loginRequest">No Recommended Questions</div>
                       :
                       <div />

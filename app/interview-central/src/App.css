@@ -60,6 +60,8 @@
   color: white;
   display: block;
   float: left;
+  z-index: 1000;
+  position: relative;
 }
 
 .Dropdown-root {
@@ -77,17 +79,19 @@
     position: relative;
     top: 30%;
     color: #909090;
+    left:30%;
 }
 
 .Dropdown-option {
     border-bottom: 1px solid #d3d3d3;
     background: white;
-    padding:5px;
+    text-align: center;
 }
 
 .Dropdown-menu {
     border: 1px solid #d3d3d3;
     position: absolute;
+    z-index: 999;
 }
 
 .Dropdown-arrow {
@@ -96,7 +100,10 @@
 
 .dropDown {
   border: 1px solid #d3d3d3;
-  margin-left: -136px;
+  border-right: none;
+  border-top: none;
+  border-bottom: none;
+  margin-left: -247px;
   height: 61px;
   width: 110px;
   display:block;
