@@ -54,8 +54,8 @@ export default class Question extends Component {
                             <p className="questionBoxText">N/A</p>                                                    
                         }
 
-                        <h3>Submissions</h3>
-                        <p className="questionBoxText">{question.submissions}</p>
+                        {/* <h3>Submissions</h3>
+                        <p className="questionBoxText">{question.submissions}</p> */}
                         <h3>Category</h3>
                         <p className="questionBoxText">{question.category}</p>
                         <h3>Link</h3>
