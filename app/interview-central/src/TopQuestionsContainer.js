@@ -16,9 +16,14 @@ export class TopQuestionsCont extends Component {
         this.state = {
             topQuestions: [],
         }
+        this.getLeaderboard = this.getLeaderboard.bind(this);
     }
 
     componentDidMount() {
+        setInterval(this.getLeaderboard, 1000);
+    }
+
+    getLeaderboard() {
         getQuestionLeaderboard()
             .then(response => {
                 return response.json();
