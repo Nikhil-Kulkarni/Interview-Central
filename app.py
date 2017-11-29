@@ -358,7 +358,7 @@ def increaseQuestionCount():
         newNumClicks = response['Items'][0]['numClicks'] + 1
         response = questionCountTable.put_item(
             Item = {
-                'name': str(question),
+                'name': question,
                 'numClicks': newNumClicks
             }
         )
